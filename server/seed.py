@@ -61,7 +61,7 @@ def create_records():
         MyBook(
             user_id = randint(1, 500),
             book_id = randint(1, 300)
-        )
+        ) for i in range (1000)
     ]
     db.session.add_all(books + posts + users + my_books)
     db.session.commit()
