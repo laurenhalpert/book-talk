@@ -15,8 +15,10 @@ from sqlalchemy.ext.associationproxy import association_proxy
 # Base = declarative_base()
 
 
-class Book (db.Model, SerializerMixin):
+class Book (db.Model):
     __tablename__="books"
+
+    serialize_rules = ('-posts.book', '-users.book')
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
@@ -29,6 +31,15 @@ class Book (db.Model, SerializerMixin):
     posts = relationship('Post', backref='book')
     users = association_proxy('posts', 'user', creator=lambda ur: Post(user=ur))
 
+    def to_dict(self):
+        return {
+            "title": self.title,
+            "author_first_name": self.author_first_name,
+            "author_last_name": self.author_last_name,
+            "genre": self.genre,
+            "book_image": self.book_image,
+            "description": self.description
+        }
     def __repr__(self):
         return f'<Book: {self.title}>'
 

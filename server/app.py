@@ -6,7 +6,7 @@
 from flask import request, session
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
-
+import sys
 # Local imports
 from config import app, db, api
 from models import Book, User, Post, MyBook
@@ -69,7 +69,22 @@ class MyBookIndex(Resource):
 class BookIndex(Resource):
     def get(self):
         books = Book.query.all()
+        # print(f"{type(book)=}")
+        # print(f"{book=} ")
+        # # sys.exit(1) 
+        # print(f"{dir(book)=}") 
+        # print(f"{book.__dict__=}")
+        # return [{"title": book.title} for book in books], 200
         return [book.to_dict() for book in books], 200
+        # ['<Book: law>', '<Book: order>']
+        # [
+        #     {
+        #         'title': 'law',
+        #         'author_first_name': 'Lauren'
+        #     }
+        # ]
+        
+
 
 class ThisBook(Resource):
     def get (self, id):

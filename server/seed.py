@@ -39,13 +39,13 @@ def create_records():
             genre = rc(genres),
             book_image = fake.unique.image_url(),
             description = fake.paragraph(nb_sentences=5)
-        ) for i in range(300)
+        ) for i in range(100)
     ]
     posts = [
         Post(
             post_content = fake.sentence(),
             user_id = randint(1, 500),
-            book_id = randint(1, 300)
+            book_id = randint(1, 100)
 
         ) for i in range(800)
     ]
@@ -60,7 +60,7 @@ def create_records():
     my_books = [
         MyBook(
             user_id = randint(1, 500),
-            book_id = randint(1, 300)
+            book_id = randint(1, 100)
         ) for i in range (1000)
     ]
     db.session.add_all(books + posts + users + my_books)
