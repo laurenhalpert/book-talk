@@ -88,10 +88,10 @@ class BookIndex(Resource):
 
 class ThisBook(Resource):
     def get (self, id):
-        book = Book.query.filter_by('id' == id).first()
+        book = Book.query.filter(Book.id == id).first()
         return book.to_dict(), 200
     def get (self, id):
-        posts = Post.query.filter_by('book_id' == id).all()
+        posts = Post.query.filter(Post.book_id == id).all()
         return [post.to_dict() for post in posts], 200
     def post (self):
         if session.get('user.id'):

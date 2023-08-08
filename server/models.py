@@ -33,6 +33,7 @@ class Book (db.Model):
 
     def to_dict(self):
         return {
+            "id": self.id,
             "title": self.title,
             "author_first_name": self.author_first_name,
             "author_last_name": self.author_last_name,
@@ -51,7 +52,13 @@ class Post (db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
 
-
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "post_content": self.post_content,
+            "user_id": self.user_id,
+            "book_id": self.book_id
+        }
     
     def __repr__(self):
         return f'<Post: {self.id}>'
