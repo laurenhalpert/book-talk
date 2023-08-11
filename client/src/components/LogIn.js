@@ -6,10 +6,10 @@ function LogIn(props) {
         <div>
             <form>
                 <label htmlFor="usernameField">Username: </label>
-                <input id="usernameField" type="text" value="myUsername"></input>
+                <input id="usernameField" type="text"></input>
                 <br></br>
                 <label htmlFor="passwordField">Password: </label>
-                <input id="passwordField" type="text" value="myPassword"></input>
+                <input id="passwordField" type="text"></input>
                 <br></br>
                 <input id="submitButton" type="submit">Log In</input>
             </form>
