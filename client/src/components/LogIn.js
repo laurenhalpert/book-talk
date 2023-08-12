@@ -19,7 +19,7 @@ function LogIn({ onLogin }) {
     
       function handleSubmit(e) {
         e.preventDefault();
-        fetch("/log_in", {
+        fetch("http://127.0.0.1:5555/api/log_in", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
