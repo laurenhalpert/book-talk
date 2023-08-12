@@ -5,16 +5,16 @@ function LogIn({ onLogin }) {
     const history = useHistory();
     const [formData, setFormData] = useState({
         username: "",
-        password: "",
-      });
+        password: ""
+    });
     
-    const handleChange= (e) => {
-
+    const handleChange=(e) =>{
 
         setFormData({
           ...formData,
           [e.target.name]: e.target.value,
         });
+        
     }
     
       function handleSubmit(e) {
@@ -39,8 +39,9 @@ function LogIn({ onLogin }) {
                 <input 
                     id="usernameField" 
                     type="text" 
+                    name="username"
                     placeholder="Username..." 
-                    value={formData.username} 
+                    value={formData.username}
                     onChange={handleChange}>
                 </input>
                 <br></br>
@@ -48,6 +49,7 @@ function LogIn({ onLogin }) {
                 <input 
                     id="passwordField" 
                     type="text" 
+                    name="password"
                     placeholder="Password..." 
                     value={formData.password} 
                     onChange={handleChange}>
