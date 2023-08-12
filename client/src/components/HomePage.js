@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import LogIn from "./LogIn"
 
 
 function HomePage({ onLogin }) {
+    const history=useHistory();
+    function handleClick(e) {
+        history.push("/signup");
+    }
     return (
         <div>
             <header>
@@ -14,7 +19,7 @@ function HomePage({ onLogin }) {
             </div>
             <div>
                 <p>Don't have an account? Sign up below.</p>
-                <button>Sign Up</button>
+                <button onClick={handleClick}>Sign Up</button>
                 {/* set up routing so that when "Sign Up" is clicked, the user is routed to the Sign Up page */} 
             </div>
         </div>

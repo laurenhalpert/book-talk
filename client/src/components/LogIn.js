@@ -8,12 +8,12 @@ function LogIn({ onLogin }) {
         password: "",
       });
     
-      function handleChange(e) {
+    const handleChange= (e) => {
         setFormData({
           ...formData,
           [e.target.name]: e.target.value,
         });
-      }
+    }
     
       function handleSubmit(e) {
         e.preventDefault();
@@ -27,13 +27,12 @@ function LogIn({ onLogin }) {
           .then((r) => r.json())
           .then((user) => {
             onLogin(user);
-            // after logging the user in, redirect to the home page!
             history.push("/home");
           });
       }
     return (
         <div id="logInForm">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="usernameField">Username: </label>
                 <input id="usernameField" type="text" placeholder="Username..." value={formData.username} onChange={handleChange}></input>
                 <br></br>
@@ -41,7 +40,6 @@ function LogIn({ onLogin }) {
                 <input id="passwordField" type="text" placeholder="Password..." value={formData.password} onChange={handleChange}></input>
                 <br></br>
                 <button id="submitBtn" type="submit">Log In</button>
-                {/* set up routing so that when "Log In" is clicked the username and password are authenticated and the user is redirected to their user homepage if authenticated, if not they receive an error message */}
             </form>
         </div>
 
