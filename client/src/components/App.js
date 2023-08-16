@@ -10,6 +10,9 @@ function App() {
   function handleLogin(){
     console.log('logged in')
   }
+  function handleSignUp(){
+    console.log('sign up time')
+  }
   return (
     <div>
       <NavBar />
@@ -21,7 +24,7 @@ function App() {
           <UserHome />
         </Route>
         <Route path="/signup">
-          <SignUp />
+          <SignUp onSignUp={handleSignUp}/>
         </Route>
       </Switch>
       

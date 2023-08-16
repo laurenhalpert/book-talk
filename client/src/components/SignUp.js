@@ -2,13 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
 
-function SignUp(props) {
+function SignUp({ onSignUp }) {
     const history=useHistory();
     const [formData, setFormData] = useState({
         username: "",
-        password: ""
+        password: "",
+        image_url: "",
+        bio: ""
     })
     const handleChange = e => {
+        console.log(e.target.name)
         setFormData({
             ...formData,
             [e.target.name]: e.target.value
@@ -16,6 +19,25 @@ function SignUp(props) {
     }
     function handleSubmit(e){
         e.preventDefault();
+        fetch("/sign_up", {
+            method: "POST",
+            headers: {
+              "Access-Control-Allow-Origin": "*",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+          })
+            .then((r) => {
+              if (r.ok){
+                  r.json().then(user=> {
+                      onSignUp(user);
+                      history.push("/home");
+                  })
+              }
+              else {
+                  r.json().then((err) => alert("401 Unauthorized. Please enter a valid username and password or sign up for an account."));
+              }
+            })
         history.push("/home")
     }
     return (
@@ -38,6 +60,26 @@ function SignUp(props) {
                     name="password"
                     placeholder="Password..."
                     value={formData.password}
+                    onChange={handleChange}>
+                </input>
+                <br></br>
+                <label htmlFor="image_url">Image URL: </label>
+                <input
+                    id="image_url"
+                    type="text"
+                    name="image_url"
+                    placeholder="Image URL..."
+                    value={formData.image_url}
+                    onChange={handleChange}>
+                </input>
+                <br></br>
+                <label htmlFor="bio">Bio: </label>
+                <input
+                    id="bio"
+                    type="text"
+                    name="bio"
+                    placeholder="bio"
+                    value={formData.bio}
                     onChange={handleChange}>
                 </input>
                 <br></br>
