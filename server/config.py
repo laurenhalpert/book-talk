@@ -16,6 +16,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json.compact = False
+app.secret_key = '8369058c8d844e429f08b6a4e071b5c3'
 
 # Define metadata, instantiate db
 convention = {
@@ -35,6 +36,6 @@ db.init_app(app)
 api = Api(app)
 
 # Instantiate CORS
-CORS(app, resources={r"/api/*": {"origins": "*"}})
+CORS(app)
 
 bcrypt = Bcrypt(app)

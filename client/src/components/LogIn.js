@@ -7,6 +7,8 @@ function LogIn({ onLogin }) {
         username: "",
         password: ""
     });
+    const [errors, setErrors] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     
     const handleChange=(e) =>{
 
@@ -19,18 +21,26 @@ function LogIn({ onLogin }) {
     
       function handleSubmit(e) {
         e.preventDefault();
-        fetch("http://127.0.0.1:5555/api/log_in", {
+        setIsLoading(true)
+        fetch("/log_in", {
           method: "POST",
           headers: {
+            "Access-Control-Allow-Origin": "*",
             "Content-Type": "application/json",
           },
           body: JSON.stringify(formData),
         })
-          .then((r) => r.json())
-          .then((user) => {
-            onLogin(user);
-            history.push("/home");
-          });
+          .then((r) => {
+            if (r.ok){
+                r.json().then(user=> {
+                    onLogin(user);
+                    history.push("/home");
+                })
+            }
+            else {
+                r.json().then((err) => alert("401 Unauthorized. Please enter a valid username and password or sign up for an account."));
+            }
+          })
       }
     return (
         <div id="logInForm">
@@ -57,6 +67,7 @@ function LogIn({ onLogin }) {
                 <br></br>
                 <button id="submitBtn" type="submit">Log In</button>
             </form>
+            
         </div>
 
     )

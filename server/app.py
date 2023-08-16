@@ -42,7 +42,7 @@ class LogIn(Resource):
     def post(self):
         username= request.get_json()['username']
         password = request.get_json()['password']
-        user = User.query.filter_by('username' ==username).first()
+        user = User.query.filter_by(username =username).first()
 
         if user:
             if user.authenticate(password):
@@ -52,7 +52,7 @@ class LogIn(Resource):
 
 class LogOut(Resource):
     def delete(self, id):
-        user = User.query.filter_by('id' == id).first()
+        user = User.query.filter_by(id = id).first()
         if user:
             session['user_id'] = None
             return {}, 204

@@ -52,11 +52,13 @@ def create_records():
     users =[
         User(
             username = fake.unique.first_name(),
-            _password_hash = fake.color(),
+            # password_hash = fake.color(),
             image_url = fake.image_url(),
             bio = fake.text()
         ) for i in range (500)
     ]
+    for user in users:
+        user.password_hash=fake.color()
     my_books = [
         MyBook(
             user_id = randint(1, 500),
