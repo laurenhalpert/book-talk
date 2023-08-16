@@ -7,8 +7,8 @@ function LogIn({ onLogin }) {
         username: "",
         password: ""
     });
-    const [errors, setErrors] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+   
+    
     
     const handleChange=(e) =>{
 
@@ -21,7 +21,7 @@ function LogIn({ onLogin }) {
     
       function handleSubmit(e) {
         e.preventDefault();
-        setIsLoading(true)
+        
         fetch("/log_in", {
           method: "POST",
           headers: {
