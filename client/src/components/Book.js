@@ -12,12 +12,13 @@ function Book({ book, user, onAdd }) {
         fetch("/my_book_index", {
             method: "POST",
             headers: {
-                "Access-Control-Allow-Origin": "*",
+                
                 "Content-Type": "application/json",
             },
             body: JSON.stringify(myBookObj),
-        } ) .then(r=>r.json())
-        .then(book=> onAdd(book))
+        } ) 
+        .then(r=>r.json())
+        .then(myBook=> onAdd(myBook))
         // set state here of having been added to my books...make a POST to MyBook
     }
     return (
