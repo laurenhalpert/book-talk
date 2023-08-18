@@ -37,17 +37,17 @@ function App() {
   }, [])
 
   function handleLogin(thing){
-    console.log(thing)
+    
     setUser((user)=>{
       return{
         ...user,
         id: thing.id,
-        usernmae: thing.username,
+        username: thing.username,
         image_url: thing.image_url,
         bio: thing.bio
       }
     })
-    console.log(user)
+    
     
   }
   function handleSignUp(){
