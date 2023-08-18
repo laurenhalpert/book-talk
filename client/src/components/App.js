@@ -36,15 +36,15 @@ function App() {
     })
   }, [])
 
-  function handleLogin(thing){
+  function handleLogin(activeUser){
     
     setUser((user)=>{
       return{
         ...user,
-        id: thing.id,
-        username: thing.username,
-        image_url: thing.image_url,
-        bio: thing.bio
+        id: activeUser.id,
+        username: activeUser.username,
+        image_url: activeUser.image_url,
+        bio: activeUser.bio
       }
     })
     
@@ -55,6 +55,7 @@ function App() {
   }
 
   function handleAdd(book) {
+    console.log(book)
     setMyBooks([
       ...myBooks,
       book
