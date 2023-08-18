@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import HomePage from "./HomePage";
-import NavBar from "./NavBar";
+
 import SignUp from "./SignUp";
 import UserHome from "./UserHome";
 import BookIndex from "./BookIndex";
@@ -17,7 +17,6 @@ function App() {
   }
   return (
     <div>
-      <NavBar />
       <Switch>
         <Route exact path="/">
           <HomePage onLogin={handleLogin}/>

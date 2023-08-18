@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import LogIn from "./LogIn"
+import LogIn from "./LogIn";
+import Header from "./Header";
 
 
 function HomePage({ onLogin }) {
@@ -10,9 +11,7 @@ function HomePage({ onLogin }) {
     }
     return (
         <div>
-            <header>
-                <h1>Book Talk</h1>
-            </header>
+            <Header />
             <p>Welcome to Book Talk! A place for book lovers to socialize with others who love the same book. Log in, or sign up to get started!</p>
             <div>
                 <LogIn onLogin={onLogin}/>

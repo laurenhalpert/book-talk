@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
+import Header from "./Header";
 
 // make user home page and create nav links for books, my books
 function UserHome(){
     return(
         <div>
-            <h1>Hello</h1>
+            <Header />
             <NavLink to="/book_index" exact>
                 All Books
             </NavLink>
