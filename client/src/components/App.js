@@ -11,7 +11,12 @@ function App() {
   // Code goes here!
   const [books, setBooks] = useState([])
   const [myBooks, setMyBooks] = useState([])
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState({
+    id: "",
+    username: "",
+    image_url: "",
+    bio: ""
+  })
 
   useEffect(()=>{
       fetch("/my_book_index")
@@ -31,9 +36,19 @@ function App() {
     })
   }, [])
 
-  function handleLogin(user){
-    setUser((user) => user );
-    // set user as stateful
+  function handleLogin(thing){
+    console.log(thing)
+    setUser((user)=>{
+      return{
+        ...user,
+        id: thing.id,
+        usernmae: thing.username,
+        image_url: thing.image_url,
+        bio: thing.bio
+      }
+    })
+    console.log(user)
+    
   }
   function handleSignUp(){
     console.log('sign up time')

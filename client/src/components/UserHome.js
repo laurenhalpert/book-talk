@@ -19,7 +19,6 @@ function UserHome(props){
     return(
         <div>
             <Header />
-            {console.log(user.id)}
             <NavLink to="/book_index" exact>
                 All Books
             </NavLink>
