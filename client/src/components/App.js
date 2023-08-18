@@ -5,6 +5,7 @@ import NavBar from "./NavBar";
 import SignUp from "./SignUp";
 import UserHome from "./UserHome";
 import BookIndex from "./BookIndex";
+import MyBookIndex from "./MyBookIndex";
 
 function App() {
   // Code goes here!
