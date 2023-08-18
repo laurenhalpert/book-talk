@@ -40,6 +40,10 @@ function App() {
   }
 
   function handleAdd(book) {
+    setMyBooks([
+      ...myBooks,
+      book
+    ])
     console.log(book)
   }
 
