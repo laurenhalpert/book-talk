@@ -10,6 +10,16 @@ import MyBookIndex from "./MyBookIndex";
 function App() {
   // Code goes here!
   const [books, setBooks] = useState([])
+  const [myBooks, setMyBooks] = useState([])
+
+  useEffect(()=>{
+      fetch("/my_book_index")
+      .then(r=>r.json())
+      .then(books => {
+        setMyBooks(books)
+        
+      })
+    }, [])
 
   useEffect(()=>{
     fetch("/book_index")
@@ -42,7 +52,7 @@ function App() {
           <BookIndex books={books}/>
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex />
+          <MyBookIndex books={myBooks}/>
         </Route>
       </Switch>
       

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Book from "./Book";
+import Header from "./Header";
 
 function BookIndex({ books }){
     return(
         <div>
-            <p>books here</p>
+            <Header />
             {books.map(book=><Book book={book}/>)
             }
         </div>
