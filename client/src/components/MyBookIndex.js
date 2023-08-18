@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
+import Header from "./Header";
+import Book from "./Book";
 
-function MyBookIndex(props) {
+function MyBookIndex({ books }) {
     return(
         <div>
-            <p>My books here</p>
+            <Header />
+            {books.map(book=><Book key={book.id} book={book}/>)}
         </div>
     )
 }

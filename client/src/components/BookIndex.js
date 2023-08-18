@@ -6,7 +6,7 @@ function BookIndex({ books }){
     return(
         <div>
             <Header />
-            {books.map(book=><Book book={book}/>)
+            {books.map(book=><Book key={book.id} book={book}/>)
             }
         </div>
     )
