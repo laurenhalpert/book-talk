@@ -9,6 +9,17 @@ import MyBookIndex from "./MyBookIndex";
 
 function App() {
   // Code goes here!
+  const [books, setBooks] = useState([])
+
+  useEffect(()=>{
+    fetch("/book_index")
+    .then(r=>r.json())
+    .then(books => {
+      setBooks(books)
+      
+    })
+  }, [])
+
   function handleLogin(){
     console.log('logged in')
   }
@@ -28,7 +39,7 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex />
+          <BookIndex books={books}/>
         </Route>
         <Route exact path="/my_book_index">
           <MyBookIndex />
