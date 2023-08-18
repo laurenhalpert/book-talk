@@ -65,6 +65,14 @@ class MyBookIndex(Resource):
             user = User.query.filter(User.id == session['user_id']).first()
             return [book.to_dict() for book in user.books], 200
         return {'error': '401 Unauthorized'}, 401
+    def post (self):
+        book_id=request.get_json()["book_id"]
+        user_id=request.get_json()["user_id"]
+
+        new_my_book=MyBook(book_id=book_id, user_id=user_id)
+
+        db.session.add(new_my_book)
+        db.session.commit()
 
 class BookIndex(Resource):
     def get(self):
