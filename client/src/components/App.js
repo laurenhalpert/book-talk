@@ -26,6 +26,12 @@ function App() {
         <Route path="/signup">
           <SignUp onSignUp={handleSignUp}/>
         </Route>
+        <Route exact path="/book_index">
+          <BookIndex />
+        </Route>
+        <Route exact path="/my_book_index">
+          <MyBookIndex />
+        </Route>
       </Switch>
       
       
