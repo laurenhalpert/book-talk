@@ -18,7 +18,7 @@ function Book({ book, user, onAdd }) {
             body: JSON.stringify(myBookObj),
         } ) 
         .then(r=>r.json())
-        .then(myBook=> onAdd(myBook))
+        .then(myBookObj => onAdd(myBookObj))
         // set state here of having been added to my books...make a POST to MyBook
     }
     return (
@@ -32,3 +32,7 @@ function Book({ book, user, onAdd }) {
 }
 
 export default Book
+
+// Add in posts for each book available to view by clicking on a button
+// User should be able to edit and delete posts they made
+// User should be able to create posts

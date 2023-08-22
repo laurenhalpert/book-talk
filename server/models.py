@@ -28,8 +28,10 @@ class Book (db.Model):
     book_image = db.Column(db.String)
     description = db.Column(db.String)
 
-    posts = relationship('Post', backref='book')
+    
+    posts = db.relationship('Post', backref='book')
     users = association_proxy('posts', 'user', creator=lambda ur: Post(user=ur))
+    
 
     def to_dict(self):
         return {
@@ -52,6 +54,8 @@ class Post (db.Model, SerializerMixin):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
 
+    
+
     def to_dict(self):
         return {
             "id": self.id,
@@ -72,8 +76,10 @@ class User (db.Model, SerializerMixin):
     image_url = db.Column(db.String)
     bio = db.Column(db.String)
 
-    posts = relationship('Post', backref='user')
+    
+    posts = db.relationship('Post', backref='user')
     books = association_proxy('posts', 'book', creator = lambda bk: Post(book = bk))
+    
 
     # @validates('username')
     # def validate_user(self, username):
@@ -106,6 +112,13 @@ class MyBook(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key = True)
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "book_id": self.book_id,
+            "user_id": self.user_id,
+        }
 
     def __repr__(self):
         return f'<MyBook {self.id}>'

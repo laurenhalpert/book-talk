@@ -59,6 +59,8 @@ def create_records():
     ]
     for user in users:
         user.password_hash=fake.color()
+
+    
     my_books = [
         MyBook(
             user_id = randint(1, 500),
