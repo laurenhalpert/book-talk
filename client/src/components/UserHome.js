@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route, NavLink } from "react-router-dom";
 import Header from "./Header";
+import MyNavBar from "./MyNavBar";
 
 // make user home page and create nav links for books, my books
 function UserHome(props){
@@ -19,12 +20,7 @@ function UserHome(props){
     return(
         <div>
             <Header />
-            <NavLink to="/book_index" exact>
-                All Books
-            </NavLink>
-            <NavLink to="/my_book_index" exact>
-                My Books
-            </NavLink>
+            <MyNavBar />
         </div>
     )
 }

@@ -61,6 +61,7 @@ class LogOut(Resource):
 
 class MyBookIndex(Resource):
     def get (self):
+        print(session)
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
             return [book.to_dict() for book in user.books], 200
