@@ -30,6 +30,7 @@ class Book (db.Model):
 
     
     posts = db.relationship('Post', backref='book')
+    
     users = association_proxy('posts', 'user', creator=lambda ur: Post(user=ur))
     
 
@@ -78,8 +79,9 @@ class User (db.Model, SerializerMixin):
 
     
     posts = db.relationship('Post', backref='user')
-    books = association_proxy('posts', 'book', creator = lambda bk: Post(book = bk))
     
+    books = association_proxy('posts', 'book', creator = lambda bk: Post(book = bk))
+    # right now dog.books is nothing because books is related through posts...maybe I can relate through MyBooks? That'd also require me to properly set up the MyBook relationship
 
     # @validates('username')
     # def validate_user(self, username):

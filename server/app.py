@@ -64,6 +64,7 @@ class MyBookIndex(Resource):
         print(session)
         if session.get('user_id'):
             user = User.query.filter(User.id == session['user_id']).first()
+            print(user.books)
             return [book.to_dict() for book in user.books], 200
         return {'error': '401 Unauthorized'}, 401
     def post (self):
@@ -76,7 +77,11 @@ class MyBookIndex(Resource):
 
         db.session.add(new_my_book)
         db.session.commit()
-
+# USE MORE PRINT STATEMENTS IN THE BACKEND TO SEE WHATS GOING ON
+# MAKE SURE SESSION IS HOLDING
+# FIX ROUTING
+# FIX BOOK OBJ GETTING SENT TO MYBOOKINDEX COMPONENT
+# WHEN SHOULD I USE CHECK SESSION?
 
         return new_my_book.to_dict(), 201
 

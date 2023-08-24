@@ -10,6 +10,7 @@ import MyBookIndex from "./MyBookIndex";
 function App() {
   // Code goes here!
   const [books, setBooks] = useState([])
+  const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
   const [user, setUser] = useState({
     id: "",
@@ -18,14 +19,9 @@ function App() {
     bio: ""
   })
 
-  useEffect(()=>{
-      fetch("/my_book_index")
-      .then(r=>r.json())
-      .then(books => {
-        setMyBooks(books)
-        
-      })
-    }, [])
+  
+
+  
 
   useEffect(()=>{
     fetch("/book_index")
@@ -33,6 +29,23 @@ function App() {
     .then(books => {
       setBooks(books)
       
+    })
+  }, [])
+
+  useEffect(()=>{
+    fetch("/my_book_index")
+    .then(r=>r.json())
+    .then(bookObj => {
+      console.log(bookObj)
+      setMyBookObj(bookObj)
+      let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
+      let filteredMyBooks = books.filter(book=>{
+        for (let i=0; i< books.length; i++) {
+          return filteredMyBookObjs.includes(book.id)
+        }
+      })
+      console.log(filteredMyBooks)
+      setMyBooks(filteredMyBooks)
     })
   }, [])
 
@@ -56,8 +69,8 @@ function App() {
 
   function handleAdd(book) {
     console.log(book)
-    setMyBooks([
-      ...myBooks,
+    setMyBookObj([
+      ...myBookObj,
       book
     ])
     console.log(book)
