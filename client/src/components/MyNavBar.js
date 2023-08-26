@@ -1,10 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
+import { useHistory, BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
+import LogOut from "./LogOut";
 
-function MyNavBar(){
+
+function MyNavBar({ onLogOut, user }){
+
+    
+
     return (
         <div>
+            <LogOut onLogOut={onLogOut} user={user} />
             <NavLink to="/book_index" exact>
                 Book Index
             </NavLink>

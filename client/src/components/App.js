@@ -8,7 +8,7 @@ import BookIndex from "./BookIndex";
 import MyBookIndex from "./MyBookIndex";
 
 function App() {
-  // Code goes here!
+  
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
@@ -19,9 +19,22 @@ function App() {
     bio: ""
   })
 
-  
+  // useEffect(() => {
+    
+  //   fetch(`/check_session${user.id}`).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+      
+  //   });
+  // }, []);
 
-  
+  // if (user) {
+  //   return <UserHome />
+  // }
+  // else {
+  //   return <HomePage />
+  // }
 
   useEffect(()=>{
     fetch("/book_index")
@@ -50,17 +63,9 @@ function App() {
   }, [])
 
   function handleLogin(activeUser){
-    
-    setUser((user)=>{
-      return{
-        ...user,
-        id: activeUser.id,
-        username: activeUser.username,
-        image_url: activeUser.image_url,
-        bio: activeUser.bio
-      }
-    })
-    
+    console.log(user)
+    setUser((user) => activeUser)
+    console.log(user)
     
   }
   function handleSignUp(){
@@ -76,6 +81,16 @@ function App() {
     console.log(book)
   }
 
+  function handleLogOut() {
+    setUser({
+      id: "",
+      username: "",
+      image_url: "",
+      bio: ""
+    })
+    console.log(user)
+  }
+
   return (
     <div>
       <Switch>
@@ -83,7 +98,7 @@ function App() {
           <HomePage onLogin={handleLogin}/>
         </Route>
         <Route path="/home">
-          <UserHome user={user}/>
+          <UserHome user={user} onLogOut={handleLogOut} />
         </Route>
         <Route path="/signup">
           <SignUp onSignUp={handleSignUp}/>

@@ -7,6 +7,7 @@ from flask import request, session
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 import sys
+import pandas as pd
 # Local imports
 from config import app, db, api
 from models import Book, User, Post, MyBook
@@ -15,6 +16,7 @@ from models import Book, User, Post, MyBook
 # Views go here!
 class SignUp(Resource):
     def post(self):
+        print(session)
         username = request.get_json()['username']
         password = request.get_json()['password']
         image_url = request.get_json()['image_url']
@@ -33,6 +35,7 @@ class SignUp(Resource):
 
 class CheckSession(Resource):
     def get(self, id):
+        print(session)
         user = User.query.filter(User.id == id).first()
         if session.get('user_id'):
             return user.to_dict(), 200
@@ -40,6 +43,7 @@ class CheckSession(Resource):
 
 class LogIn(Resource):
     def post(self):
+        print(session)
         username= request.get_json()['username']
         password = request.get_json()['password']
         user = User.query.filter_by(username =username).first()
@@ -52,6 +56,7 @@ class LogIn(Resource):
 
 class LogOut(Resource):
     def delete(self, id):
+        print(session)
         user = User.query.filter_by(id = id).first()
         if user:
             session['user_id'] = None
@@ -69,6 +74,7 @@ class MyBookIndex(Resource):
         return {'error': '401 Unauthorized'}, 401
     def post (self):
         # if session.get('user.id'):
+        print(session)
         request_json = request.get_json()
         book_id=request.get_json()["book_id"]
         user_id=request.get_json()["user_id"]
@@ -89,7 +95,9 @@ class MyBookIndex(Resource):
 
 class BookIndex(Resource):
     def get(self):
+        print(session)
         books = Book.query.all()
+        print(books)
         # print(f"{type(book)=}")
         # print(f"{book=} ")
         # # sys.exit(1) 
@@ -97,6 +105,7 @@ class BookIndex(Resource):
         # print(f"{book.__dict__=}")
         # return [{"title": book.title} for book in books], 200
         return [book.to_dict() for book in books], 200
+
         # ['<Book: law>', '<Book: order>']
         # [
         #     {
@@ -109,12 +118,15 @@ class BookIndex(Resource):
 
 class ThisBook(Resource):
     def get (self, id):
+        print(session)
         book = Book.query.filter(Book.id == id).first()
         return book.to_dict(), 200
     def get (self, id):
+        print(session)
         posts = Post.query.filter(Post.book_id == id).all()
         return [post.to_dict() for post in posts], 200
     def post (self):
+        print(session)
         if session.get('user.id'):
             request_json = request.get_json()
             post_content = request_json['post_content']
@@ -131,9 +143,9 @@ class ThisBook(Resource):
 
 
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
-api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
+api.add_resource(CheckSession, '/api/check_session/<int:id>', endpoint='check_session')
 api.add_resource(LogIn, '/api/log_in', endpoint = 'log_in')
-api.add_resource(LogOut, '/api/log_out', endpoint = 'log_out')
+api.add_resource(LogOut, '/api/log_out/<int:id>', endpoint = 'log_out')
 api.add_resource(MyBookIndex, '/api/my_book_index', endpoint = 'my_book_index')
 api.add_resource(BookIndex, '/api/book_index', endpoint ='book_index')
 api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')

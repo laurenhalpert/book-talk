@@ -18,7 +18,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 class Book (db.Model):
     __tablename__="books"
 
-    serialize_rules = ('-posts.book', '-users.book')
+    serialize_rules = ('-post.book', '-user.books')
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
@@ -34,16 +34,16 @@ class Book (db.Model):
     users = association_proxy('posts', 'user', creator=lambda ur: Post(user=ur))
     
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "title": self.title,
-            "author_first_name": self.author_first_name,
-            "author_last_name": self.author_last_name,
-            "genre": self.genre,
-            "book_image": self.book_image,
-            "description": self.description
-        }
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "title": self.title,
+    #         "author_first_name": self.author_first_name,
+    #         "author_last_name": self.author_last_name,
+    #         "genre": self.genre,
+    #         "book_image": self.book_image,
+    #         "description": self.description
+    #     }
     def __repr__(self):
         return f'<Book: {self.title}>'
 
@@ -57,13 +57,13 @@ class Post (db.Model, SerializerMixin):
 
     
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "post_content": self.post_content,
-            "user_id": self.user_id,
-            "book_id": self.book_id
-        }
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "post_content": self.post_content,
+    #         "user_id": self.user_id,
+    #         "book_id": self.book_id
+    #     }
     
     def __repr__(self):
         return f'<Post: {self.id}>'
@@ -115,12 +115,12 @@ class MyBook(db.Model, SerializerMixin):
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def to_dict(self):
-        return {
-            "id": self.id,
-            "book_id": self.book_id,
-            "user_id": self.user_id,
-        }
+    # def to_dict(self):
+    #     return {
+    #         "id": self.id,
+    #         "book_id": self.book_id,
+    #         "user_id": self.user_id,
+    #     }
 
     def __repr__(self):
         return f'<MyBook {self.id}>'

@@ -4,7 +4,7 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
 // make user home page and create nav links for books, my books
-function UserHome(props){
+function UserHome({ user, onLogOut }){
 
     const [myBooks, setMyBooks] = useState([])
 
@@ -20,7 +20,7 @@ function UserHome(props){
     return(
         <div>
             <Header />
-            <MyNavBar />
+            <MyNavBar onLogOut={onLogOut} user={user} />
         </div>
     )
 }
