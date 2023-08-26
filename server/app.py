@@ -3,7 +3,7 @@
 # Standard library imports
 
 # Remote library imports
-from flask import request, session
+from flask import request, session, make_response, jsonify
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
 import sys
@@ -104,8 +104,9 @@ class BookIndex(Resource):
         # print(f"{dir(book)=}") 
         # print(f"{book.__dict__=}")
         # return [{"title": book.title} for book in books], 200
+        
         return [book.to_dict() for book in books], 200
-
+        
         # ['<Book: law>', '<Book: order>']
         # [
         #     {

@@ -15,10 +15,10 @@ from sqlalchemy.ext.associationproxy import association_proxy
 # Base = declarative_base()
 
 
-class Book (db.Model):
+class Book (db.Model, SerializerMixin):
     __tablename__="books"
 
-    serialize_rules = ('-post.book', '-user.books')
+    serialize_rules = ('-posts', '-users')
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
