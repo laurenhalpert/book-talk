@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
 
-function ThisBook({ book, setPosts, posts }) {
+function ThisBook({ book, setPosts, posts, user }) {
     useEffect(()=>{
         fetch(`/book_index/%{book.id}`)
         .then(r=>r.json())
@@ -21,7 +21,7 @@ function ThisBook({ book, setPosts, posts }) {
             </div>
             <div>
                 <h2>What people are saying...</h2>
-                {posts.map(post => <Post key={post.id} post={post} />)}
+                {posts.map(post => <Post key={post.id} post={post} user={user} book={book} />)}
             </div>
             
 

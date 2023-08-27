@@ -121,7 +121,7 @@ function App() {
           <MyBookIndex user={user} books={myBooks} onAdd={handleAdd}/>
         </Route>
         <Route exact path="/book_index/:id">
-          <ThisBook book={thisBook} setPosts={setPosts} posts={posts}/>
+          <ThisBook book={thisBook} setPosts={setPosts} posts={posts} user={user} />
         </Route>
       </Switch>
       
