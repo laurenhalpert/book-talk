@@ -144,7 +144,7 @@ class ThisBook(Resource):
 
 
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
-api.add_resource(CheckSession, '/api/check_session/<int:id>', endpoint='check_session')
+api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
 api.add_resource(LogIn, '/api/log_in', endpoint = 'log_in')
 api.add_resource(LogOut, '/api/log_out/<int:id>', endpoint = 'log_out')
 api.add_resource(MyBookIndex, '/api/my_book_index', endpoint = 'my_book_index')
@@ -153,3 +153,7 @@ api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
+
+
+# why is session starting as previously logged in user?
+# how restart session

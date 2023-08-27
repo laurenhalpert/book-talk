@@ -9,7 +9,7 @@ function Post({ post, user, book }) {
     })
 
     function handleClick(e){
-        if (e.target.id == "likeBtn") {
+        if (e.target.id === "likeBtn") {
             console.log('liked')
             // set likes state, patch post, add like column to Post in backend
         }
@@ -28,7 +28,7 @@ function Post({ post, user, book }) {
         <div>
             <p>{post.post_content}</p>
             <button id="likeBtn" onClick={handleClick} />
-            {user.id == post.user_id ? <button id="delBtn" onClick={handleClick} /> : null}
+            {user.id === post.user_id ? <button id="delBtn" onClick={handleClick} /> : null}
             <label htmlFor="newPost">New Post: </label>
             <input type="textarea" id="newPost" name="newPost" onChange={handleChange} value={formData.post_content}></input>
         </div>

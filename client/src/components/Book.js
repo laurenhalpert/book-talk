@@ -9,7 +9,7 @@ function Book({ book, user, onAdd, onPostsClick }) {
         console.log(e.target.id)
         console.log(book)
         console.log(user)
-        if (e.target.id == 'addBookBtn'){
+        if (e.target.id === 'addBookBtn'){
 
             const myBookObj ={
                 book_id: book.id,

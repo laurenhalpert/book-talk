@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Post from "./Post";
+import Header from "./Header";
+import MyNavBar from "./MyNavBar";
 
 function ThisBook({ book, setPosts, posts, user }) {
     useEffect(()=>{
@@ -12,6 +14,8 @@ function ThisBook({ book, setPosts, posts, user }) {
       }, [])
     return(
         <div>
+            <Header />
+            <MyNavBar />
             <div>
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>

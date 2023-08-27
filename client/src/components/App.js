@@ -30,22 +30,22 @@ function App() {
     bio: ""
   })
 
-  // useEffect(() => {
+  useEffect(() => {
     
-  //   fetch(`/check_session${user.id}`).then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
+    fetch(`/check_session`).then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
       
-  //   });
-  // }, []);
+    });
+  }, []);
 
-  // if (user) {
-  //   return <UserHome />
-  // }
-  // else {
-  //   return <HomePage />
-  // }
+  if (user) {
+    return <UserHome />
+  }
+  else {
+    return <HomePage />
+  }
 
   useEffect(()=>{
     fetch("/book_index")
@@ -67,6 +67,7 @@ function App() {
         for (let i=0; i< books.length; i++) {
           return filteredMyBookObjs.includes(book.id)
         }
+        
       })
       console.log(filteredMyBooks)
       setMyBooks(filteredMyBooks)
