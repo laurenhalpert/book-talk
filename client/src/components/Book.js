@@ -1,24 +1,43 @@
 import React, { useEffect, useState } from "react";
-function Book({ book, user, onAdd }) {
-    function handleClick() {
+import { useHistory } from "react-router-dom";
+
+function Book({ book, user, onAdd, onPostsClick }) {
+    const history = useHistory();
+
+    function handleClick(e) {
         console.log('clicked')
+        console.log(e.target.id)
         console.log(book)
         console.log(user)
-        const myBookObj ={
-            book_id: book.id,
-            user_id: user.id
+        if (e.target.id == 'addBookBtn'){
+
+            const myBookObj ={
+                book_id: book.id,
+                user_id: user.id
+            }
+            console.log(myBookObj)
+            fetch("/my_book_index", {
+                method: "POST",
+                headers: {
+                    
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(myBookObj),
+            } ) 
+            .then(r=>r.json())
+            .then(myBookObj => onAdd(myBookObj))
         }
-        console.log(myBookObj)
-        fetch("/my_book_index", {
-            method: "POST",
-            headers: {
-                
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(myBookObj),
-        } ) 
-        .then(r=>r.json())
-        .then(myBookObj => onAdd(myBookObj))
+        history.push(`/book_index/${book.id}`)
+        onPostsClick({
+            id: book.id,
+            title: book.title,
+            author_first_name: book.author_first_name,
+            author_last_name: book.author_last_name,
+            genre: book.genre,
+            book_image: book.book_image,
+            description: book.description
+        })
+
         // set state here of having been added to my books...make a POST to MyBook
     }
     return (
@@ -27,6 +46,7 @@ function Book({ book, user, onAdd }) {
             <h2>{book.title}</h2>
             <h3>By: {book.author_first_name} {book.author_last_name}</h3>
             <button id="addBookBtn" onClick={handleClick}>Add to My Books</button>
+            <button id="postsBtn" onClick={handleClick}>View Posts</button>
         </div>
     )
 }

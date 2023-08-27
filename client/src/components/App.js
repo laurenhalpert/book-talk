@@ -6,12 +6,23 @@ import SignUp from "./SignUp";
 import UserHome from "./UserHome";
 import BookIndex from "./BookIndex";
 import MyBookIndex from "./MyBookIndex";
+import ThisBook from "./ThisBook";
 
 function App() {
   
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
+  const [posts, setPosts] =useState([])
+  const [thisBook, setThisBook] = useState({
+    id: "",
+    title: "",
+    author_first_name: "",
+    author_last_name: "",
+    genre: "",
+    book_image: "",
+    description: ""
+  })
   const [user, setUser] = useState({
     id: "",
     username: "",
@@ -104,10 +115,13 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} onAdd={handleAdd} user={user}/>
+          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} />
         </Route>
         <Route exact path="/my_book_index">
           <MyBookIndex user={user} books={myBooks} onAdd={handleAdd}/>
+        </Route>
+        <Route exact path="/book_index/:id">
+          <ThisBook book={thisBook} setPosts={setPosts} posts={posts}/>
         </Route>
       </Switch>
       

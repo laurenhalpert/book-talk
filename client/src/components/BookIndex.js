@@ -3,12 +3,12 @@ import Book from "./Book";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
-function BookIndex({ books, onAdd, user }){
+function BookIndex({ books, onAdd, user, onPostsClick }){
     return(
         <div>
             <Header />
             <MyNavBar />
-            {books.map(book=><Book key={book.id} book={book} onAdd={onAdd} user={user}/>)
+            {books.map(book=><Book key={book.id} book={book} onAdd={onAdd} user={user} onPostsClick={onPostsClick} />)
             }
         </div>
     )
