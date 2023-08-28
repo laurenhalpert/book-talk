@@ -58,11 +58,13 @@ class LogOut(Resource):
     def delete(self, id):
         print(session)
         user = User.query.filter_by(id = id).first()
+        print(user)
         if user:
             session['user_id'] = None
             return {}, 204
-        else:
-            return {'error': '401 Unauthorized'}
+            print(session)
+        # else:
+        #     return {'error': '401 Unauthorized'}
 
 class MyBookIndex(Resource):
     def get (self):
@@ -157,3 +159,5 @@ if __name__ == '__main__':
 
 # why is session starting as previously logged in user?
 # how restart session
+# get rid of MyBook or relate it properly
+# add in create book to BookIndex

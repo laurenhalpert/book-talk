@@ -40,12 +40,12 @@ function App() {
     });
   }, []);
 
-  if (user) {
-    return <UserHome />
-  }
-  else {
-    return <HomePage />
-  }
+  // if (user) {
+  //   return <UserHome />
+  // }
+  // else {
+  //   return <HomePage />
+  // }
 
   useEffect(()=>{
     fetch("/book_index")
