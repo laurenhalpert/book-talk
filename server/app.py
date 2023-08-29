@@ -34,8 +34,9 @@ class SignUp(Resource):
         return {"error": "422 Unprocessable entity"}, 422 
 
 class CheckSession(Resource):
-    def get(self, id):
+    def get(self):
         print(session)
+        id = session.get('user_id')
         user = User.query.filter(User.id == id).first()
         if session.get('user_id'):
             return user.to_dict(), 200
@@ -55,12 +56,17 @@ class LogIn(Resource):
         return {"error": "401 unauthorized"}, 401
 
 class LogOut(Resource):
-    def delete(self, id):
+    def delete(self):
         print(session)
+        
+        # print(user)
+        id = session.get('user_id')
         user = User.query.filter_by(id = id).first()
         print(user)
         if user:
+            print('into this section')
             session['user_id'] = None
+            print(session)
             return {}, 204
             print(session)
         # else:
@@ -148,7 +154,7 @@ class ThisBook(Resource):
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
 api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
 api.add_resource(LogIn, '/api/log_in', endpoint = 'log_in')
-api.add_resource(LogOut, '/api/log_out/<int:id>', endpoint = 'log_out')
+api.add_resource(LogOut, '/api/log_out', endpoint = 'log_out')
 api.add_resource(MyBookIndex, '/api/my_book_index', endpoint = 'my_book_index')
 api.add_resource(BookIndex, '/api/book_index', endpoint ='book_index')
 api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')
@@ -157,7 +163,6 @@ if __name__ == '__main__':
     app.run(port=5555, debug=True)
 
 
-# why is session starting as previously logged in user?
-# how restart session
-# get rid of MyBook or relate it properly
+
+# check session seems to not be working properly...bc of state? or something else?
 # add in create book to BookIndex

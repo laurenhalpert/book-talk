@@ -4,14 +4,14 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
 function ThisBook({ book, setPosts, posts, user }) {
-    useEffect(()=>{
-        fetch(`/book_index/%{book.id}`)
-        .then(r=>r.json())
-        .then(posts => {
-          setPosts(posts)
+    // useEffect(()=>{
+    //     fetch(`/book_index/${book.id}`)
+    //     .then(r=>r.json())
+    //     .then(posts => {
+    //       setPosts(posts)
           
-        })
-      }, [])
+    //     })
+    //   }, [])
     return(
         <div>
             <Header />

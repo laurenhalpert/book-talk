@@ -6,7 +6,7 @@ function LogOut({ onLogOut, user }) {
     function handleClick(e) {
         // console.log("log out clicked")
         // console.log(user)
-        fetch(`/log_out/${user.id}`, {
+        fetch(`/log_out`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json"

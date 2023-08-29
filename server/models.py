@@ -18,7 +18,7 @@ from sqlalchemy.ext.associationproxy import association_proxy
 class Book (db.Model, SerializerMixin):
     __tablename__="books"
 
-    serialize_rules = ('-posts', '-users')
+    serialize_rules = ('-users',)
 
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String)
@@ -30,7 +30,6 @@ class Book (db.Model, SerializerMixin):
 
     
     posts = db.relationship('Post', backref='book')
-    
     users = association_proxy('posts', 'user', creator=lambda ur: Post(user=ur))
     
 
@@ -45,11 +44,11 @@ class Book (db.Model, SerializerMixin):
     #         "description": self.description
     #     }
     def __repr__(self):
-        return f'<Book: {self.title}>'
+        return f'<Book: {self.title} >'
 
 class Post (db.Model, SerializerMixin):
     __tablename__='posts'
-
+    serialize_rules = ('-book', '-user',)
     id = db.Column(db.Integer, primary_key = True)
     post_content = db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -70,7 +69,8 @@ class Post (db.Model, SerializerMixin):
 
 class User (db.Model, SerializerMixin):
     __tablename__ = 'users'
-
+    serialize_rules = ('-_password_hash', 'books', '-my_books.id')
+    # serialize_rules = ('-books.user', '-user.books', '-posts.book', '-posts.user')
     id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String, unique = True, nullable=False)
     _password_hash = db.Column(db.String)
@@ -79,7 +79,7 @@ class User (db.Model, SerializerMixin):
 
     
     posts = db.relationship('Post', backref='user')
-    
+    my_books = db.relationship('MyBook', backref='user')
     books = association_proxy('posts', 'book', creator = lambda bk: Post(book = bk))
     # right now dog.books is nothing because books is related through posts...maybe I can relate through MyBooks? That'd also require me to properly set up the MyBook relationship
 
@@ -106,11 +106,11 @@ class User (db.Model, SerializerMixin):
             self._password_hash, password.encode('utf-8'))
 
     def __repr__(self):
-        return f'<User {self.username}>'
+        return f'<User {self.username} >'
 
 class MyBook(db.Model, SerializerMixin):
     __tablename__ = 'my_books'
-
+    serialize_rules = ('-book', '-user')
     id = db.Column(db.Integer, primary_key = True)
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -124,3 +124,5 @@ class MyBook(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f'<MyBook {self.id}>'
+
+# try different serialize rules to stop the looping

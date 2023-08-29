@@ -5,7 +5,7 @@ import MyNavBar from "./MyNavBar";
 
 // make user home page and create nav links for books, my books
 function UserHome({ user, onLogOut }){
-
+    console.log(onLogOut)
     const [myBooks, setMyBooks] = useState([])
 
     useEffect(()=>{

@@ -29,7 +29,7 @@ function App() {
     image_url: "",
     bio: ""
   })
-
+  console.log(user)
   useEffect(() => {
     
     fetch(`/check_session`).then((r) => {
@@ -40,12 +40,15 @@ function App() {
     });
   }, []);
 
-  // if (user) {
+  // if (user.id !== "") {
   //   return <UserHome />
   // }
   // else {
-  //   return <HomePage />
+  //   return <HomePage onLogin={handleLogin}/>
   // }
+  
+
+  // ^yellow isn't working properly
 
   useEffect(()=>{
     fetch("/book_index")
@@ -56,23 +59,29 @@ function App() {
     })
   }, [])
 
-  useEffect(()=>{
-    fetch("/my_book_index")
-    .then(r=>r.json())
-    .then(bookObj => {
-      console.log(bookObj)
-      setMyBookObj(bookObj)
-      let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
-      let filteredMyBooks = books.filter(book=>{
-        for (let i=0; i< books.length; i++) {
-          return filteredMyBookObjs.includes(book.id)
-        }
+
+  
+
+  // useEffect(()=>{
+  //   fetch("/my_book_index")
+  //   .then(r=>r.json())
+  //   .then(bookObj => {
+  //     console.log(bookObj)
+  //     setMyBookObj(bookObj)
+  //     let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
+  //     let filteredMyBooks = books.filter(book=>{
+  //       for (let i=0; i< books.length; i++) {
+  //         return filteredMyBookObjs.includes(book.id)
+  //       }
         
-      })
-      console.log(filteredMyBooks)
-      setMyBooks(filteredMyBooks)
-    })
-  }, [])
+  //     })
+  //     console.log(filteredMyBooks)
+  //     setMyBooks(filteredMyBooks)
+  //   })
+  // }, [])
+  if (user.id === ''){
+    return (<HomePage onLogin={handleLogin} />)
+  } 
 
   function handleLogin(activeUser){
     console.log(user)
@@ -100,7 +109,7 @@ function App() {
       image_url: "",
       bio: ""
     })
-    console.log(user)
+    
   }
 
   return (
