@@ -125,13 +125,13 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} />
+          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} />
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd}/>
+          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} />
         </Route>
         <Route exact path="/book_index/:id">
-          <ThisBook book={thisBook} setPosts={setPosts} posts={posts} user={user} />
+          <ThisBook book={thisBook} setPosts={setPosts} posts={posts} user={user} onLogOut={handleLogOut} />
         </Route>
       </Switch>
       

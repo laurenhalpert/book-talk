@@ -3,7 +3,7 @@ import Post from "./Post";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
-function ThisBook({ book, setPosts, posts, user }) {
+function ThisBook({ book, setPosts, posts, user, onLogOut }) {
     // useEffect(()=>{
     //     fetch(`/book_index/${book.id}`)
     //     .then(r=>r.json())
@@ -15,7 +15,7 @@ function ThisBook({ book, setPosts, posts, user }) {
     return(
         <div>
             <Header />
-            <MyNavBar />
+            <MyNavBar onLogOut={onLogOut} user={user} />
             <div>
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>
