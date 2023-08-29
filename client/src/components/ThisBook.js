@@ -4,14 +4,15 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
 function ThisBook({ book, setPosts, posts, user, onLogOut }) {
-    // useEffect(()=>{
-    //     fetch(`/book_index/${book.id}`)
-    //     .then(r=>r.json())
-    //     .then(posts => {
-    //       setPosts(posts)
+    useEffect(()=>{
+        fetch(`/book_index/${book.id}`)
+        .then(r=>r.json())
+        .then(posts => {
+          setPosts(posts)
           
-    //     })
-    //   }, [])
+        })
+      }, [])
+    console.log(book)
     return(
         <div>
             <Header />
