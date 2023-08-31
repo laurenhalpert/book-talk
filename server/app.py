@@ -134,14 +134,14 @@ class ThisBook(Resource):
         print(session)
         posts = Post.query.filter(Post.book_id == id).all()
         return [post.to_dict() for post in posts], 200
-    def post (self):
+    def post (self, id):
         print(session)
         if session.get('user.id'):
             request_json = request.get_json()
             post_content = request_json['post_content']
 
             try:
-                post = Post( post_content=post_content, book_id=id, user_id=session['user_id'])
+                post = Post( post_content=post_content, book_id=book_id, user_id=user_id)
                 db.session.add(post)
                 db.session.commit()
                 return post.to_dict(), 201
