@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Post from "./Post";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
+import NewPostForm from "./NewPostForm";
 
 function ThisBook({ book, setPosts, posts, user, onLogOut }) {
     useEffect(()=>{
@@ -27,6 +28,7 @@ function ThisBook({ book, setPosts, posts, user, onLogOut }) {
             <div>
                 <h2>What people are saying...</h2>
                 {posts.map(post => <Post key={post.id} post={post} user={user} book={book} />)}
+                <NewPostForm user={user} book={book} />
             </div>
             
 
