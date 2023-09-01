@@ -92,8 +92,8 @@ function App() {
     console.log(user)
     
   }
-  function handleSignUp(){
-    console.log('sign up time')
+  function handleSignUp(user){
+    setUser(user)
   }
 
   function handleAdd(book) {

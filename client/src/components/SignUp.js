@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import Header from "./Header";
 
 function SignUp({ onSignUp }) {
     const history=useHistory();
@@ -42,6 +42,7 @@ function SignUp({ onSignUp }) {
     }
     return (
         <div>
+            <Header />
             <form onSubmit={handleSubmit}>
                 <label htmlFor="username">Username: </label>
                 <input 
