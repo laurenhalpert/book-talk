@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Post({ post, user, book, onLike }) {
+function Post({ post, user, book, onLike, onDelete }) {
 
     
 
@@ -28,6 +28,14 @@ function Post({ post, user, book, onLike }) {
         }
         else {
             console.log('deleted')
+            fetch(`/book_index/${book.id}/${post.id}`,{
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            
+            .then(() => onDelete(post.id))
         }
         // delete post, set posts 
     }

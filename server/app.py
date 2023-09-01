@@ -183,6 +183,13 @@ class ThisBookPost (Resource):
         db.session.commit()
 
         return post.to_dict(), 201
+    def delete(self, id, post_id):
+        print(session)
+        post = Post.query.filter(Post.id == post_id).first()
+
+        db.session.delete(post)
+        db.session.commit()
+        return {}, 204
 
 
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
