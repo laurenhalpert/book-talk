@@ -132,12 +132,12 @@ class BookIndex(Resource):
         description = request.get_json()['description']
         
         try:
-                book = Book( title=title, author_first_name=author_first_name, author_last_name=author_last_name, genre=genre, book_image=book_image, description=description)
-                db.session.add(book)
-                db.session.commit()
-                return book.to_dict(), 201
-            except IntegrityError:
-                return {'error': '422 Unprocessable Entity'}, 422
+            book = Book( title=title, author_first_name=author_first_name, author_last_name=author_last_name, genre=genre, book_image=book_image, description=description)
+            db.session.add(book)
+            db.session.commit()
+            return book.to_dict(), 201
+        except IntegrityError:
+            return {'error': '422 Unprocessable Entity'}, 422
         return {'error': '401 Unauthorized'}, 401
 
         

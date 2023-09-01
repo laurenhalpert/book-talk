@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function NewBookForm(props) {
+function NewBookForm({ addNewBook }) {
     const [formData, setFormData] = useState({
         title: "",
         author_first_name:"",
@@ -19,6 +19,16 @@ function NewBookForm(props) {
     function handleSubmit(e){
         e.preventDefault();
         console.log('submitted')
+        fetch('/book_index', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(r=>r.json())
+        .then(book => addNewBook(book))
+
         setFormData({
             title: "",
             author_first_name:"",

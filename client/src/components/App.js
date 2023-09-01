@@ -121,6 +121,12 @@ function App() {
   //     post
   //   })
   // }
+  function handleNewBook(book) {
+    setBooks([
+      ...books,
+      book
+    ])
+  }
 
   return (
     <div>
@@ -135,7 +141,7 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} />
+          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook}/>
         </Route>
         <Route exact path="/my_book_index">
           <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} />
