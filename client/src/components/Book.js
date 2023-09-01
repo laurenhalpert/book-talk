@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 function Book({ book, user, onAdd, onPostsClick }) {
     const history = useHistory();
-
+    console.log(book)
     function handleClick(e) {
         console.log('clicked')
         console.log(e.target.id)
@@ -27,16 +27,19 @@ function Book({ book, user, onAdd, onPostsClick }) {
             .then(r=>r.json())
             .then(myBookObj => onAdd(myBookObj))
         }
-        history.push(`/book_index/${book.id}`)
-        onPostsClick({
-            id: book.id,
-            title: book.title,
-            author_first_name: book.author_first_name,
-            author_last_name: book.author_last_name,
-            genre: book.genre,
-            book_image: book.book_image,
-            description: book.description
-        })
+        else {
+            history.push(`/book_index/${book.id}`)
+            onPostsClick({
+                id: book.id,
+                title: book.title,
+                author_first_name: book.author_first_name,
+                author_last_name: book.author_last_name,
+                genre: book.genre,
+                book_image: book.book_image,
+                description: book.description
+            })
+        }
+        
 
         // set state here of having been added to my books...make a POST to MyBook
     }

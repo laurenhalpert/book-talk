@@ -65,26 +65,26 @@ function App() {
 
   
 
-  // useEffect(()=>{
-  //   fetch("/my_book_index")
-  //   .then(r=>r.json())
-  //   .then(bookObj => {
-  //     console.log(bookObj)
-  //     setMyBookObj(bookObj)
-  //     let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
-  //     let filteredMyBooks = books.filter(book=>{
-  //       for (let i=0; i< books.length; i++) {
-  //         return filteredMyBookObjs.includes(book.id)
-  //       }
+  useEffect(()=>{
+    fetch("/my_book_index")
+    .then(r=>r.json())
+    .then(bookObj => {
+      console.log(bookObj)
+      setMyBookObj(bookObj)
+      let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
+      let filteredMyBooks = books.filter(book=>{
+        for (let i=0; i< books.length; i++) {
+          return filteredMyBookObjs.includes(book.id)
+        }
         
-  //     })
-  //     console.log(filteredMyBooks)
-  //     setMyBooks(filteredMyBooks)
-  //   })
-  // }, [])
-  // if (user.id === ''){
-  //   return (<HomePage onLogin={handleLogin} />)
-  // } 
+      })
+      console.log(filteredMyBooks)
+      setMyBooks(filteredMyBooks)
+    })
+  }, [])
+  if (user.id === ''){
+    return (<HomePage onLogin={handleLogin} />)
+  } 
 
   function handleLogin(activeUser){
     console.log(user)
@@ -96,13 +96,14 @@ function App() {
     setUser(user)
   }
 
-  function handleAdd(book) {
+  function handleAdd(bookObj) {
+    console.log(bookObj.book_id)
+    const book = books.filter(book=> book.id === bookObj.book_id)
     console.log(book)
-    setMyBookObj([
-      ...myBookObj,
-      book
+    setMyBooks([
+      ...myBooks,
+      book[0]
     ])
-    console.log(book)
   }
 
   function handleLogOut() {
@@ -144,7 +145,7 @@ function App() {
           <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook}/>
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} />
+          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook} />
         </Route>
         <Route exact path="/book_index/:id">
           <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />
