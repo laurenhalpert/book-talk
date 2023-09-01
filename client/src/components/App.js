@@ -13,7 +13,7 @@ function App() {
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
-  const [posts, setPosts] =useState([])
+  // const [posts, setPosts] =useState([])
   const [thisBook, setThisBook] = useState({
     id: "",
     title: "",
@@ -112,6 +112,13 @@ function App() {
     
   }
 
+  // function handleNewPost(post) {
+  //   setPosts({
+  //     ...posts,
+  //     post
+  //   })
+  // }
+
   return (
     <div>
       <Switch>
@@ -131,7 +138,7 @@ function App() {
           <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} />
         </Route>
         <Route exact path="/book_index/:id">
-          <ThisBook book={thisBook} setPosts={setPosts} posts={posts} user={user} onLogOut={handleLogOut} />
+          <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />
         </Route>
       </Switch>
       

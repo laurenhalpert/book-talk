@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function NewPostForm({ user, book }) {
+function NewPostForm({ user, book, onAddPost, posts }) {
     const [formData, setFormData] = useState({
         user_id: user.id,
         book_id: book.id,
@@ -25,7 +25,13 @@ function NewPostForm({ user, book }) {
             body: JSON.stringify(formData)
         })
         .then (r => r.json())
-        .then (newPost => console.log(newPost))
+        .then (newPost => {
+            onAddPost([...posts, newPost]);
+            setFormData({
+                ...formData,
+                post_content: ""
+            })
+        })
 
         // .then set posts to add in new post
 
