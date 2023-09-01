@@ -19,7 +19,7 @@ function ThisBook({ book, user, onLogOut }) {
 
     function handleLike(updatedPost) {
         console.log(updatedPost)
-        setPosts(posts.map(post => post.id === updatedPost.id? updatedPost: post))
+        setPosts((posts)=>posts.map(post => post.id === updatedPost.id? updatedPost: post))
 
     }
     return(

@@ -17,13 +17,13 @@ function Post({ post, user, book, onLike }) {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({likes: 20})
+                body: JSON.stringify({likes: post.likes +1})
             })
             .then(r=>r.json())
-            .then(post => console.log(post))
+            .then(updatedPost => onLike(updatedPost))
 
 
-            onLike(book)
+            
             // set likes state, patch post, add like column to Post in backend
         }
         else {

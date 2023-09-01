@@ -158,9 +158,9 @@ class ThisBook(Resource):
         if session.get('user_id'):
             request_json = request.get_json()
             post_content = request_json['post_content']
-
+            likes = request_json['likes']
             try:
-                post = Post( post_content=post_content, book_id=id, user_id=session.get('user_id'))
+                post = Post( post_content=post_content, likes=likes, book_id=id, user_id=session.get('user_id'))
                 db.session.add(post)
                 db.session.commit()
                 return post.to_dict(), 201
@@ -172,7 +172,8 @@ class ThisBookPost (Resource):
         print(session)
         
         post = Post.query.filter(Post.id == post_id).first()
-        
+        print(type(post.likes))
+        print(post)
         post.likes += 1
         
         # for attr in request.form:

@@ -4,6 +4,7 @@ function NewPostForm({ user, book, onAddPost, posts }) {
     const [formData, setFormData] = useState({
         user_id: user.id,
         book_id: book.id,
+        likes: 0,
         post_content: ""
     })
     
@@ -11,7 +12,8 @@ function NewPostForm({ user, book, onAddPost, posts }) {
         console.log(e.target.name)
         setFormData({
             ...formData,
-            post_content: e.target.value
+            post_content: e.target.value,
+            likes: 0
         })
     }
 

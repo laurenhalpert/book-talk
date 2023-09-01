@@ -66,7 +66,7 @@ class Post (db.Model, SerializerMixin):
     #     }
     
     def __repr__(self):
-        return f'<Post: {self.id}>'
+        return f'<Post: {self.id} Likes: {self.likes}>'
 
 class User (db.Model, SerializerMixin):
     __tablename__ = 'users'
