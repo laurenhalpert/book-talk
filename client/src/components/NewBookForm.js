@@ -16,10 +16,22 @@ function NewBookForm(props) {
             [e.target.name]: e.target.value
         })
     }
+    function handleSubmit(e){
+        e.preventDefault();
+        console.log('submitted')
+        setFormData({
+            title: "",
+            author_first_name:"",
+            author_last_name:"",
+            genre: "",
+            book_image:"",
+            description:""
+        })
+    }
 
     return(
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="titleField" >Title: </label>
                 <input id="titleField" type="text" name="title" value={formData.title} onChange={handleChange}></input> 
                 <br></br>
