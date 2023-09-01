@@ -6,6 +6,7 @@ import NewPostForm from "./NewPostForm";
 
 function ThisBook({ book, user, onLogOut }) {
     const [posts, setPosts] =useState([])
+    
     useEffect(()=>{
         fetch(`/book_index/${book.id}`)
         .then(r=>r.json())
@@ -16,8 +17,10 @@ function ThisBook({ book, user, onLogOut }) {
       }, [])
     console.log(book)
 
-    function handleLike() {
-        console.log('handling like')
+    function handleLike(updatedPost) {
+        console.log(updatedPost)
+        setPosts(posts.map(post => post.id === updatedPost.id? updatedPost: post))
+
     }
     return(
         <div>

@@ -5,8 +5,24 @@ function Post({ post, user, book, onLike }) {
     
 
     function handleClick(e){
+        let updatedPost = {
+            ...post,
+            likes: post.likes + 1
+        }
+        console.log(updatedPost)
         if (e.target.id === "likeBtn") {
             console.log('liked')
+            fetch(`/book_index/${book.id}/${post.id}`,{
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({likes: 20})
+            })
+            .then(r=>r.json())
+            .then(post => console.log(post))
+
+
             onLike(book)
             // set likes state, patch post, add like column to Post in backend
         }

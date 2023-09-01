@@ -167,7 +167,21 @@ class ThisBook(Resource):
             except IntegrityError:
                 return {'error': '422 Unprocessable Entity'}, 422
         return {'error': '401 Unauthorized'}, 401
+class ThisBookPost (Resource):
+    def patch(self, id, post_id):
+        print(session)
+        
+        post = Post.query.filter(Post.id == post_id).first()
+        
+        post.likes += 1
+        
+        # for attr in request.form:
+        #     print(attr)
+        #     setattr(post, attr, request.form[attr])
+        db.session.add(post)
+        db.session.commit()
 
+        return post.to_dict(), 201
 
 
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
@@ -177,6 +191,7 @@ api.add_resource(LogOut, '/api/log_out', endpoint = 'log_out')
 api.add_resource(MyBookIndex, '/api/my_book_index', endpoint = 'my_book_index')
 api.add_resource(BookIndex, '/api/book_index', endpoint ='book_index')
 api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')
+api.add_resource(ThisBookPost, '/api/book_index/<int:id>/<int:post_id>', endpoint = 'post_id')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
