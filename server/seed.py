@@ -44,6 +44,7 @@ def create_records():
     posts = [
         Post(
             post_content = fake.sentence(),
+            likes = randint(0, 10),
             user_id = randint(1, 500),
             book_id = randint(1, 100)
 

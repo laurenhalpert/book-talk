@@ -51,6 +51,7 @@ class Post (db.Model, SerializerMixin):
     serialize_rules = ('-book', '-user',)
     id = db.Column(db.Integer, primary_key = True)
     post_content = db.Column(db.String)
+    likes = db.Column(db.Integer)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     book_id = db.Column(db.Integer, db.ForeignKey('books.id'))
 

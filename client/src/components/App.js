@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useHistory } from "react-router-dom";
+
 import HomePage from "./HomePage";
 
 import SignUp from "./SignUp";
@@ -9,7 +10,7 @@ import MyBookIndex from "./MyBookIndex";
 import ThisBook from "./ThisBook";
 
 function App() {
-  
+  const history = useHistory();
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
@@ -29,14 +30,16 @@ function App() {
     image_url: "",
     bio: ""
   })
-  console.log(user)
+  
   useEffect(() => {
     
     fetch(`/check_session`).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
       }
-      
+      else {
+        r.json().then(()=> <HomePage onLogin={handleLogin} />)
+      }
     });
   }, []);
 
@@ -79,9 +82,9 @@ function App() {
   //     setMyBooks(filteredMyBooks)
   //   })
   // }, [])
-  if (user.id === ''){
-    return (<HomePage onLogin={handleLogin} />)
-  } 
+  // if (user.id === ''){
+  //   return (<HomePage onLogin={handleLogin} />)
+  // } 
 
   function handleLogin(activeUser){
     console.log(user)
@@ -109,7 +112,7 @@ function App() {
       image_url: "",
       bio: ""
     })
-    
+    history.push('/')
   }
 
   // function handleNewPost(post) {
