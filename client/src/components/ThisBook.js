@@ -15,6 +15,10 @@ function ThisBook({ book, user, onLogOut }) {
         })
       }, [])
     console.log(book)
+
+    function handleLike() {
+        console.log('handling like')
+    }
     return(
         <div>
             <Header />
@@ -29,7 +33,7 @@ function ThisBook({ book, user, onLogOut }) {
             <div>
                 <h2>What people are saying...</h2>
                 {console.log(posts)}
-                {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} />): console.log('no posts here') }
+                {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike}/>): console.log('no posts here') }
                 <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
             </div>
             

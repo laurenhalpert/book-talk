@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 
-function Post({ post, user, book }) {
+function Post({ post, user, book, onLike }) {
 
     
 
     function handleClick(e){
         if (e.target.id === "likeBtn") {
             console.log('liked')
+            onLike(book)
             // set likes state, patch post, add like column to Post in backend
         }
-        console.log('deleted')
+        else {
+            console.log('deleted')
+        }
         // delete post, set posts 
     }
 
