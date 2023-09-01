@@ -15,6 +15,7 @@ function App() {
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
   // const [posts, setPosts] =useState([])
+  const [inMyBooks, setInMyBooks] = useState(false)
   const [thisBook, setThisBook] = useState({
     id: "",
     title: "",
@@ -104,6 +105,7 @@ function App() {
       ...myBooks,
       book[0]
     ])
+    setInMyBooks(inMyBooks=> !inMyBooks)
   }
 
   function handleLogOut() {
@@ -142,10 +144,10 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook}/>
+          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} inMyBooks={inMyBooks}/>
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook} />
+          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook} inMyBooks={inMyBooks}/>
         </Route>
         <Route exact path="/book_index/:id">
           <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />

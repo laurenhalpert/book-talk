@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Book({ book, user, onAdd, onPostsClick }) {
+function Book({ book, user, onAdd, onPostsClick, inMyBooks }) {
     const history = useHistory();
-    console.log(book)
+    
+    console.log(inMyBooks)
     function handleClick(e) {
         console.log('clicked')
         console.log(e.target.id)
@@ -16,6 +17,7 @@ function Book({ book, user, onAdd, onPostsClick }) {
                 user_id: user.id
             }
             console.log(myBookObj)
+
             fetch("/my_book_index", {
                 method: "POST",
                 headers: {
@@ -43,12 +45,18 @@ function Book({ book, user, onAdd, onPostsClick }) {
 
         // set state here of having been added to my books...make a POST to MyBook
     }
+    function removeClick(){
+        console.log('remove clicked')
+    }
     return (
         <div>
             <img className="bookCover" src={book.book_image} alt="book cover"></img>
             <h2>{book.title}</h2>
             <h3>By: {book.author_first_name} {book.author_last_name}</h3>
-            <button id="addBookBtn" onClick={handleClick}>Add to My Books</button>
+            {/* included in mybooks? removebookbtn: addbookbtn */}
+            {/* to do this make state for inMyBooks */}
+            {console.log(inMyBooks)}
+            {inMyBooks? <button id="removeBookBtn" onClick={removeClick}>Remove from My Books</button>:<button id="addBookBtn" onClick={handleClick}>Add to My Books</button>}
             <button id="postsBtn" onClick={handleClick}>View Posts</button>
         </div>
     )
