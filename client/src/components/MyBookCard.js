@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Book({ book, user, onAdd, onPostsClick }) {
+function MyBookCard ({ book, user, onAdd, onPostsClick, onRemove }) {
     const history = useHistory();
     
     
@@ -10,25 +10,24 @@ function Book({ book, user, onAdd, onPostsClick }) {
         console.log(e.target.id)
         console.log(book)
         console.log(user)
-        if (e.target.id === 'addBookBtn'){
+        if (e.target.id === 'removeBtn'){
 
             const myBookObj ={
                 book_id: book.id,
                 user_id: user.id
             }
             console.log(myBookObj)
-
-            fetch("/my_book_index", {
-                method: "POST",
+            console.log(book.id)
+            fetch(`/my_book_index/${book.id}`, {
+                method: "DELETE",
                 headers: {
                     
                     "Content-Type": "application/json",
-                },
-                body: JSON.stringify(myBookObj),
+                }
             } ) 
-            .then(r=>r.json())
-            .then(myBookObj => onAdd(myBookObj))
+            .then(() => onRemove(book.id))
         }
+        // on removal, the book should be removed from myBooks (DELETE)
         else {
             history.push(`/book_index/${book.id}`)
             onPostsClick({
@@ -51,15 +50,14 @@ function Book({ book, user, onAdd, onPostsClick }) {
             <img className="bookCover" src={book.book_image} alt="book cover"></img>
             <h2>{book.title}</h2>
             <h3>By: {book.author_first_name} {book.author_last_name}</h3>
-            {/* included in mybooks? removebookbtn: addbookbtn */}
-            {/* to do this make state for inMyBooks */}
-            <button id="addBookBtn" onClick={handleClick}>Add to My Books</button>
+            
+            <button id="removeBtn" onClick={handleClick}>Remove from My Books</button>
             <button id="postsBtn" onClick={handleClick}>View Posts</button>
         </div>
     )
 }
 
-export default Book
+export default MyBookCard;
 
 // Add in posts for each book available to view by clicking on a button
 // User should be able to edit and delete posts they made

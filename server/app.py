@@ -98,7 +98,64 @@ class MyBookIndex(Resource):
 # WHEN SHOULD I USE CHECK SESSION?
 
         return new_my_book.to_dict(), 201
+class ThisMyBook(Resource):
+    def get (self, my_id):
+        print(session)
+        book = Book.query.filter(Book.id == my_id).first()
+        return book.to_dict(), 200
+    def get (self, my_id):
+        print(session)
+        posts = Post.query.filter(Post.book_id == my_id).all()
+        return [post.to_dict() for post in posts], 200
+    def post (self, my_id):
+        print(session.get('user_id'))
+        if session.get('user_id'):
+            request_json = request.get_json()
+            post_content = request_json['post_content']
+            likes = request_json['likes']
+            try:
+                post = Post( post_content=post_content, likes=likes, book_id=my_id, user_id=session.get('user_id'))
+                db.session.add(post)
+                db.session.commit()
+                return post.to_dict(), 201
+            except IntegrityError:
+                return {'error': '422 Unprocessable Entity'}, 422
+        return {'error': '401 Unauthorized'}, 401
+    def delete (self, my_id):
+        if session.get('user_id'):
+            request_json = request.get_json()
+            book = MyBook.query.filter(MyBook.book_id == my_id).first()
+            print(book)
+            db.session.delete(book)
+            db.session.commit()
+            return {}, 204
+        else :
+            return {'error': '401 Unathorized'}, 401
 
+
+class ThisMyBookPost(Resource):
+    def patch(self, my_id, my_post_id):
+        print(session)
+        
+        post = Post.query.filter(Post.id == my_post_id).first()
+        print(type(post.likes))
+        print(post)
+        post.likes += 1
+        
+        # for attr in request.form:
+        #     print(attr)
+        #     setattr(post, attr, request.form[attr])
+        db.session.add(post)
+        db.session.commit()
+
+        return post.to_dict(), 201
+    def delete(self, my_id, my_post_id):
+        print(session)
+        post = Post.query.filter(Post.id == my_post_id).first()
+
+        db.session.delete(post)
+        db.session.commit()
+        return {}, 204
         # return {'error': '401 Unauthorized'}, 401
 
 class BookIndex(Resource):
@@ -197,9 +254,12 @@ api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
 api.add_resource(LogIn, '/api/log_in', endpoint = 'log_in')
 api.add_resource(LogOut, '/api/log_out', endpoint = 'log_out')
 api.add_resource(MyBookIndex, '/api/my_book_index', endpoint = 'my_book_index')
+api.add_resource(ThisMyBook, '/api/my_book_index/<int:my_id>', endpoint ='my_id')
+api.add_resource(ThisMyBookPost, '/api/my_book_index/<int:my_id>/<int:my_post_id>', endpoint = 'my_post_id')
 api.add_resource(BookIndex, '/api/book_index', endpoint ='book_index')
 api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')
 api.add_resource(ThisBookPost, '/api/book_index/<int:id>/<int:post_id>', endpoint = 'post_id')
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

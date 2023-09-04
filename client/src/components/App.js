@@ -8,6 +8,7 @@ import UserHome from "./UserHome";
 import BookIndex from "./BookIndex";
 import MyBookIndex from "./MyBookIndex";
 import ThisBook from "./ThisBook";
+import MyThisBook from "./MyThisBook";
 
 function App() {
   const history = useHistory();
@@ -15,7 +16,7 @@ function App() {
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
   // const [posts, setPosts] =useState([])
-  const [inMyBooks, setInMyBooks] = useState(false)
+  
   const [thisBook, setThisBook] = useState({
     id: "",
     title: "",
@@ -25,6 +26,17 @@ function App() {
     book_image: "",
     description: ""
   })
+
+  const [myThisBook, setMyThisBook] = useState({
+    id: "",
+    title: "",
+    author_first_name: "",
+    author_last_name: "",
+    genre: "",
+    book_image: "",
+    description: ""
+  })
+
   const [user, setUser] = useState({
     id: "",
     username: "",
@@ -105,7 +117,7 @@ function App() {
       ...myBooks,
       book[0]
     ])
-    setInMyBooks(inMyBooks=> !inMyBooks)
+    
   }
 
   function handleLogOut() {
@@ -131,6 +143,12 @@ function App() {
     ])
   }
 
+  function handleRemove(id) {
+    console.log(id)
+    const updatedMyBooks = myBooks.filter(book => book.book_id !== id)
+    console.log(updatedMyBooks)
+  }
+
   return (
     <div>
       <Switch>
@@ -144,13 +162,16 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} inMyBooks={inMyBooks}/>
+          <BookIndex books={books} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook} inMyBooks={inMyBooks}/>
+          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook}  onRemove={handleRemove} onPicture={setMyThisBook} />
         </Route>
         <Route exact path="/book_index/:id">
           <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />
+        </Route>
+        <Route exact path ="/my_book_index/:my_id">
+          <MyThisBook book={myThisBook} user={user} onLogOut={handleLogOut} onRemove={handleRemove} />
         </Route>
       </Switch>
       
