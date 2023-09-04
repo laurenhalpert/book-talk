@@ -145,8 +145,10 @@ function App() {
 
   function handleRemove(id) {
     console.log(id)
-    const updatedMyBooks = myBooks.filter(book => book.book_id !== id)
+    console.log(myBooks)
+    const updatedMyBooks = myBooks.filter(book => book.id !== id)
     console.log(updatedMyBooks)
+    setMyBooks(updatedMyBooks)
   }
 
   return (
