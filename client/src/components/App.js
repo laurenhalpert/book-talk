@@ -95,9 +95,7 @@ function App() {
       setMyBooks(filteredMyBooks)
     })
   }, [])
-  if (user.id === ''){
-    return (<HomePage onLogin={handleLogin} />)
-  } 
+  
 
   function handleLogin(activeUser){
     console.log(user)

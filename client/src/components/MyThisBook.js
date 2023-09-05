@@ -37,6 +37,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
                 "Content-Type": "application/json",
             }
         } ) 
+        
         .then(() => onRemove(book.id))
     }
 

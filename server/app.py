@@ -91,11 +91,7 @@ class MyBookIndex(Resource):
 
         db.session.add(new_my_book)
         db.session.commit()
-# USE MORE PRINT STATEMENTS IN THE BACKEND TO SEE WHATS GOING ON
-# MAKE SURE SESSION IS HOLDING
-# FIX ROUTING
-# FIX BOOK OBJ GETTING SENT TO MYBOOKINDEX COMPONENT
-# WHEN SHOULD I USE CHECK SESSION?
+
 
         return new_my_book.to_dict(), 201
 class ThisMyBook(Resource):
@@ -122,15 +118,22 @@ class ThisMyBook(Resource):
                 return {'error': '422 Unprocessable Entity'}, 422
         return {'error': '401 Unauthorized'}, 401
     def delete (self, my_id):
-        if session.get('user_id'):
-            request_json = request.get_json()
-            book = MyBook.query.filter(MyBook.book_id == my_id).first()
-            print(book)
-            db.session.delete(book)
-            db.session.commit()
-            return {}, 204
-        else :
-            return {'error': '401 Unathorized'}, 401
+        print(session)
+        book = MyBook.query.filter_by(book_id = my_id, user_id = session.get('user_id')).first()
+        # breakpoint()
+        db.session.delete(book)
+        db.session.commit()
+        return {}, 204
+        # if session.get('user_id'):
+        #     request_json = request.get_json()
+        #     print(my_id)
+        #     book = MyBook.query.filter(MyBook.book_id == my_id).first()
+        #     print(book)
+        #     db.session.delete(book)
+        #     db.session.commit()
+        #     return {}, 204
+        # else :
+        #     return {'error': '401 Unathorized'}, 401
 
 
 class ThisMyBookPost(Resource):
@@ -268,3 +271,5 @@ if __name__ == '__main__':
 
 # check session seems to not be working properly...bc of state? or something else?
 # add in create book to BookIndex
+
+# check on other fetch calls to /mbi/id to see if they work
