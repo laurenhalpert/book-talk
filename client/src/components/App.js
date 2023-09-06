@@ -183,3 +183,11 @@ function App() {
 }
 
 export default App;
+
+
+// to dos:
+// -make it pretty
+// -make sure it's working correctly
+// -make README
+// -make walkthrough video
+// -write blog
