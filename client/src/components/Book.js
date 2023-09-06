@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 
-function Book({ book, user, onAdd, onPostsClick }) {
+function Book({ book, myBooks, user, onAdd, onPostsClick }) {
     const history = useHistory();
     
     
     function handleClick(e) {
         console.log('clicked')
-        console.log(e.target.id)
-        console.log(book)
+        console.log(e.target)
+        console.log(book === book)
         console.log(user)
-        if (e.target.id === 'addBookBtn'){
+        let myBook = myBooks.filter(item => item.title === book.title)[0]
+
+        console.log(book === myBook)
+        if (e.target.id === 'addBookBtn'&& book !== myBook ){
 
             const myBookObj ={
                 book_id: book.id,
@@ -29,6 +32,11 @@ function Book({ book, user, onAdd, onPostsClick }) {
             .then(r=>r.json())
             .then(myBookObj => onAdd(myBookObj))
         }
+        else if (book === myBook) {
+            alert("This book has already been added to your books.")
+        }
+        // onAdd, some kind of confirmation of successful add should be given
+        // pop up error if book is already in myBooks
         else {
             history.push(`/book_index/${book.id}`)
             onPostsClick({
