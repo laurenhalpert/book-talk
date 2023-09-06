@@ -27,10 +27,10 @@ function ThisBook({ book, user, onLogOut }) {
         setPosts(updatedPostsArray)
     }
     return(
-        <div>
+        <div className="bookMoreInfo">
             <Header />
             <MyNavBar onLogOut={onLogOut} user={user} />
-            <div>
+            <div className="bookInfo">
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>
                 <h3>{book.author_first_name} {book.author_last_name}</h3>
@@ -38,9 +38,10 @@ function ThisBook({ book, user, onLogOut }) {
                 <p>{book.description}</p>
             </div>
             <div>
-                <h2>What people are saying...</h2>
+                <h2 className="postsHeader">What people are saying...</h2>
                 {console.log(posts)}
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
+                <br></br>
                 <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
             </div>
             

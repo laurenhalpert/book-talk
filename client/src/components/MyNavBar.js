@@ -9,14 +9,14 @@ function MyNavBar({ onLogOut, user }){
     
 
     return (
-        <div id="myNavBar">
+        <div id="myNavBar" class="nav">
             <LogOut onLogOut={onLogOut} user={user} />
-            <NavLink to="/book_index" exact>
+            <span><NavLink to="/book_index" exact>
                 Book Index
-            </NavLink>
-            <NavLink to="/my_book_index" exact>
+            </NavLink></span>
+            <span><NavLink to="/my_book_index" exact>
                 My Book Index
-            </NavLink>
+            </NavLink></span>
         </div>
     )
 }

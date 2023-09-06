@@ -42,7 +42,7 @@ function Post({ post, user, book, onLike, onDelete }) {
 
   
     return (
-        <div>
+        <div className="post">
             <p>{post.post_content}</p>
             <button id="likeBtn" onClick={handleClick}>{post.likes} Like</button>
             {user.id === post.user_id ? <button id="delBtn" onClick={handleClick}>Delete</button> : null}

@@ -23,7 +23,8 @@ function MyBookIndex({ books, onAdd, user, onPostsClick, onLogOut, onRemove, onP
         <div>
             <Header />
             <MyNavBar onLogOut={onLogOut} user={user} />
-            {books.map(book=><img key={book.id} id={book.id} src={book.book_image} alt="book cover" onClick={handleClick}></img>)}
+            <br></br>
+            {books.map(book=><img className="bookCover" key={book.id} id={book.id} src={book.book_image} alt="book cover" onClick={handleClick}></img>)}
             {/* {books.map(book=><MyBookCard key={book.id} book={book} onAdd={onAdd} user={user} onPostsClick={onPostsClick} onRemove={onRemove} />) */}
             {/* {books.map(book=><Book key={book.id} book={book} user={user} onAdd={onAdd}/>)} */}
             {/* get books whose ids match those associated with user id */}

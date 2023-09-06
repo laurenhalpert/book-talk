@@ -1,15 +1,20 @@
 body {
-  background: "white";
+  background-image: url('https://static.vecteezy.com/system/resources/thumbnails/002/305/052/small/real-grayscale-marble-texture-background-vector.jpg');
   font-family: "Andale Mono";
+  text-align: center;
 }
 
 div{
-  
   padding-bottom: 20px;
 }
 
-img{
-  padding: 10px;
+
+div.book{
+  border: #808080 solid 3px ;
+  background: #EFFEFD;
+  width: 250px;
+  margin: 20px;
+  display: inline-block;
 }
 
 span{
@@ -22,14 +27,57 @@ input{
 }
 
 img{
+  padding: 10px;
   height: 200px;
+  width: 100px;
 }
 
 div#myNavBar {
   display: inline-block;
 }
 
+div.bookMoreInfo{
+  background: #EFFEFD;
+}
+
+div.bookInfo {
+  border-bottom: #808080 solid 3px ;
+}
+
+div.post {
+  border: #808080 solid 3px ;
+  margin: auto;
+  width: 50%;
+}
+
+div#login {
+  background: #EFFEFD;
+  margin: auto;
+  width: 50%;
+  border: #808080 solid 3px ;
+}
+
+div#signup {
+  background: #EFFEFD;
+  margin: auto;
+  width: 50%;
+  border: #808080 solid 3px ;
+}
+
 
 header {
-  background: #EFFEFD;
+  background: #DCDCDC;
+}
+
+h3#newBookHeader {
+  color: #0598CF;
+}
+
+h2.postsHeader {
+  color: #0598CF;
+}
+
+
+button {
+  margin: 2px;
 }

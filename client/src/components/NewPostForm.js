@@ -43,7 +43,7 @@ function NewPostForm({ user, book, onAddPost, posts }) {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="newPost">New Post: </label>
                 <textarea id="newPost" name="newPost" placeholder="Thoughts..." onChange={handleChange} value={formData.post_content}></textarea>
-                <button id="submitBtn" type="submit" >Submit</button>
+                <button id="submitBtn" type="submit" >Post</button>
             </form>
         </div>
     )

@@ -10,13 +10,14 @@ function HomePage({ onLogin }) {
         history.push("/signup");
     }
     return (
-        <div>
+        <div id="home">
             <Header />
             <p>Welcome to Book Talk! A place for book lovers to socialize with others who love the same book. Log in, or sign up to get started!</p>
-            <div>
+            <div id="login">
                 <LogIn onLogin={onLogin}/>
             </div>
-            <div>
+            <br></br>
+            <div id="signup">
                 <p>Don't have an account? Sign up below.</p>
                 <button onClick={handleClick}>Sign Up</button>
                 {/* set up routing so that when "Sign Up" is clicked, the user is routed to the Sign Up page */} 

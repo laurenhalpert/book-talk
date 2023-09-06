@@ -30,14 +30,14 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
         }
         console.log(myBookObj)
         console.log(book.id)
-        fetch(`/my_book_index/${book.id}`, {
-            method: "DELETE",
-            headers: {
+        // fetch(`/my_book_index/${book.id}`, {
+        //     method: "DELETE",
+        //     headers: {
                 
-                "Content-Type": "application/json",
-            }
-        } ) 
-        
+        //         "Content-Type": "application/json",
+        //     }
+        // } ) 
+        // getting error 400 bad request
         .then(() => onRemove(book.id))
     }
 
@@ -51,10 +51,10 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
         setPosts(updatedPostsArray)
     }
     return(
-        <div>
+        <div className="bookMoreInfo">
             <Header />
             <MyNavBar onLogOut={onLogOut} user={user} />
-            <div>
+            <div className="bookInfo">
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>
                 <h3>{book.author_first_name} {book.author_last_name}</h3>
@@ -66,6 +66,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
                 <h2>What people are saying...</h2>
                 {console.log(posts)}
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
+                <br></br>
                 <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
             </div>
             
