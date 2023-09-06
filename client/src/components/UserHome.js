@@ -5,7 +5,7 @@ import MyNavBar from "./MyNavBar";
 
 // make user home page and create nav links for books, my books
 function UserHome({ user, onLogOut }){
-    console.log(onLogOut)
+    
     const [myBooks, setMyBooks] = useState([])
 
     useEffect(()=>{
@@ -16,11 +16,13 @@ function UserHome({ user, onLogOut }){
           
         })
       }, [])
-
+    console.log(user)
     return(
         <div>
             <Header />
             <MyNavBar onLogOut={onLogOut} user={user} />
+            <h2>Welcome {user.username}!</h2>
+            <img className="userPic" src={user.image_url} alt='picture of user'></img>
         </div>
     )
 }

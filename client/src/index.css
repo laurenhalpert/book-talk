@@ -32,6 +32,11 @@ img{
   width: 100px;
 }
 
+img.userPic {
+  height: 50%;
+  width: 50%;
+}
+
 div#myNavBar {
   display: inline-block;
 }
