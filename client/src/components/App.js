@@ -147,6 +147,7 @@ function App() {
     const updatedMyBooks = myBooks.filter(book => book.id !== id)
     console.log(updatedMyBooks)
     setMyBooks(updatedMyBooks)
+    history.push('/my_book_index')
   }
 
   return (
