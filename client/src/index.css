@@ -25,6 +25,9 @@ img{
   height: 200px;
 }
 
+div#myNavBar {
+  display: inline-block;
+}
 
 
 header {
