@@ -32,7 +32,7 @@ function Book({ book, myBooks, user, onAdd, onPostsClick }) {
             .then(r=>r.json())
             .then(myBookObj => onAdd(myBookObj))
         }
-        else if (book === myBook) {
+        else if (book === myBook && e.target.id !== "postsBtn") {
             alert("This book has already been added to your books.")
         }
         // onAdd, some kind of confirmation of successful add should be given

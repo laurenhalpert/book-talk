@@ -30,13 +30,13 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
         }
         console.log(myBookObj)
         console.log(book.id)
-        // fetch(`/my_book_index/${book.id}`, {
-        //     method: "DELETE",
-        //     headers: {
+        fetch(`/my_book_index/${book.id}`, {
+            method: "DELETE",
+            headers: {
                 
-        //         "Content-Type": "application/json",
-        //     }
-        // } ) 
+                "Content-Type": "application/json",
+            }
+        } ) 
         // getting error 400 bad request
         .then(() => onRemove(book.id))
     }
