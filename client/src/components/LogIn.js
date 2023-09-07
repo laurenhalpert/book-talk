@@ -58,7 +58,7 @@ function LogIn({ onLogin }) {
                 <label htmlFor="passwordField">Password: </label>
                 <input 
                     id="passwordField" 
-                    type="text" 
+                    type="password" 
                     name="password"
                     placeholder="Password..." 
                     value={formData.password} 
