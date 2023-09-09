@@ -99,7 +99,12 @@ function App() {
 
   function handleLogin(activeUser){
     console.log(user)
-    setUser((user) => activeUser)
+    // find a way to set user to user who matches activeUser.username
+    // fetch users setUser(users.filter(user=> user.username === activeUser.username))
+    fetch('/log_in')
+    .then(r=> r.json())
+    .then(user=>setUser(user))
+    // setUser((user) => activeUser)
     console.log(user)
     
   }

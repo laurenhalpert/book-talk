@@ -6,12 +6,12 @@ import Header from "./Header";
 
 function SignUp({ onSignUp }) {
     const history=useHistory();
-    const [formData, setFormData] = useState({
-        username: "",
-        password: "",
-        image_url: "",
-        bio: ""
-    })
+    // const [formData, setFormData] = useState({
+    //     username: "",
+    //     password: "",
+    //     image_url: "",
+    //     bio: ""
+    // })
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username"),
         password: yup.string().required("Must enter a valid password").max(15),
@@ -45,36 +45,36 @@ function SignUp({ onSignUp }) {
           });
         },
     });
-    const handleChange = e => {
-        console.log(e.target.name)
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
-    function handleSubmit(e){
-        e.preventDefault();
-        fetch("/sign_up", {
-            method: "POST",
-            headers: {
-              "Access-Control-Allow-Origin": "*",
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-          })
-            .then((r) => {
-              if (r.ok){
-                  r.json().then(user=> {
-                      onSignUp(user);
-                      history.push("/home");
-                  })
-              }
-              else {
-                  r.json().then((err) => alert("401 Unauthorized. Please enter a valid username and password or sign up for an account."));
-              }
-            })
-        history.push("/home")
-    }
+    // const handleChange = e => {
+    //     console.log(e.target.name)
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+    // function handleSubmit(e){
+    //     e.preventDefault();
+    //     fetch("/sign_up", {
+    //         method: "POST",
+    //         headers: {
+    //           "Access-Control-Allow-Origin": "*",
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(formData),
+    //       })
+    //         .then((r) => {
+    //           if (r.ok){
+    //               r.json().then(user=> {
+    //                   onSignUp(user);
+    //                   history.push("/home");
+    //               })
+    //           }
+    //           else {
+    //               r.json().then((err) => alert("401 Unauthorized. Please enter a valid username and password or sign up for an account."));
+    //           }
+    //         })
+    //     history.push("/home")
+    // }
     return (
         <div>
             <Header />

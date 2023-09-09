@@ -47,6 +47,9 @@ class LogIn(Resource):
         print(session)
         username= request.get_json()['username']
         password = request.get_json()['password']
+        # image_url = request.get_json()['image_url']
+        # bio = request.get_json()['bio']
+
         user = User.query.filter_by(username =username).first()
 
         if user:
@@ -54,6 +57,11 @@ class LogIn(Resource):
                 session['user_id'] = user.id
                 return user.to_dict(), 200
         return {"error": "401 unauthorized"}, 401
+    def get(self):
+        print(session)
+        user = User.query.filter_by(id=session['user_id']).first()
+        return user.to_dict(), 200
+
 
 class LogOut(Resource):
     def delete(self):
