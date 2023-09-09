@@ -1,70 +1,74 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Book Talk
+## Overview
+-Book Talk is a fullstack application utilizing React JS, Flask, and Python. Book Talk is a platform where users can make posts about a particular book and converse with each other through liking others' posts, creating a post of their own, or deleting a post they have made. A user can also add a book to "their books" for ease of access.
+## The Set Up
+-This application has been seeded using faker, random choice, and an array of genres self-made
+-The front end consists of many React components written in JavaScript
+-The back end consists of models (models.py), seeding (seed.py), configuration (config.py), and routing (app.py)
+    -The models are used to create tables in the database via flask migrations
+        -each table is built from a class
+        -each class inherits from db.Model and SerializerMixin
+            -db.Model is imported from config.py
+            -SerializerMixin aids with serialization and allows for the .to_dict() method to be used 
+        -some classes use serialize_rules to prevent recursion errors
+        -the classes are related using foreign keys, backrefs, and an association proxy
+    -Seeding was done for ease of programming, debugging, and demonstration of how the app works
+    -Configuration was set up to establish the location of the database, the secret key, metadata, CORS, and bcrypt
+    -Routing establishes what actions the server takes when presented with different HTTP verbs and establishes endpoints for fetch requests
+## Usage
+### Home Page
+-When a user first visits the site, they are taken to the homepage where they are presented with two options:
+    -log in
+    -sign up
+-If a user enters valid credentials, they will be redirected to the user home page via programmatic navigation
+-If a user enters invalid credentials, an alert will appear to inform them that they've used invalid credentials and to either enter valid credentials or sign up for an account
+-If a user clicks on the "Sign Up" button, they will be redirected to the Sign Up page programmatically
+### Sign Up Page
+-Users see a sign up form where they will be prompted to enter:
+    -a username
+    -a password
+    -a short bio
+    -an image URL
+-Upon submission of a new sign up, the user is redirected to the user home page via programmatic navigation
+-There is also a "Home" button that, upon being clicked, will redirect the user to the Home Page
+### User Home Page
+-This page is only reachable if a user has entered valid credentials
+-User is welcomed and has four options:
+    =Book Index
+    -My Book Index
+    -Logout
+    -Home
+-If a user selects "Book Index" they will be taken to the Book Index Page programmatically
+-If a user selects "My Book Index" they will be taken to the My Book Index Page programmatically
+-If a user selects "Logout" they will be logged out and taken back to the Hoome Page
+-If a user selects "Home" they will remain logged in but will be taken back to the Home Page
+### Book Index
+-A user can view a list of book cards where each book card has two options:
+    -Add to My Books
+        -Upon clicking, if the book is NOT already in My Book Index, the book will be added to My Book Index
+        -if the book is already in My Book Index, it will not be added for a second time, and the user will be alerted that that book is already in the My Book Index
+    -View Posts
+        -Upon clicking, a user is redirected to a page dedicated to that book and its posts
+            -The user will see all of the book info (title, author, genre, description, and book image) as well as posts that users have made regarding that particular book
+                -Each post has a "like" button that shows how many likes each post has
+                -If a post was made by the user that is currently logged in, they have the ability to delete that post (posts can only be deleted by the user who created them)
+            -On this page, there is also a "Home" option, which, when clicked, redirects the user back to the home page while remaining logged in.
+-At the bottom of the page, there is a form where a user can add a book to the book index by filling out each field and clicking submit
+-On the Book Index page, there is also a "Home" option, which, when clicked, redirects the user back to the home page while remaining logged in.
+### My Book Index
+-A user can view books that they've placed in their "my books" for ease of viewing
+-Each book shows up only as the book cover image
+    -when the image is clicked, a user is redirected to a page dedicated to that book and its posts
+         -The user will see all of the book info (title, author, genre, description, and book image) as well as posts that users have made regarding that particular book
+                -Each post has a "like" button that shows how many likes each post has
+                -If a post was made by the user that is currently logged in, they have the ability to delete that post (posts can only be deleted by the user who created them)
+        -There is also a "Remove from My Books" button that, when clicked, removes the book from the My Book Index and redirects the user programmatically to the My Book Index
+        -on this page, there is also a "Home" option, which, when clicked, redirects the user back to the home page while remaining logged in.
+-On the My Book Index page, there is also a "Home" option, which, when clicked, redirects the user back to the home page while remaining logged in.
+## GitHub URL
+-https://github.com/laurenhalpert/book-talk
+## Acknowledgements
+-Background image: 'https://static.vecteezy.com/system/resources/thumbnails/002/305/052/small/real-grayscale-marble-texture-background-vector.jpg'
+-Book Cover images from faker
+## Contributing
+-Not open to contributions at this time.
