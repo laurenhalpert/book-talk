@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
 import Header from "./Header";
 
 function SignUp({ onSignUp }) {
@@ -10,6 +12,39 @@ function SignUp({ onSignUp }) {
         image_url: "",
         bio: ""
     })
+    const formSchema = yup.object().shape({
+        username: yup.string().required("Must enter a username"),
+        password: yup.string().required("Must enter a valid password").max(15),
+        image_url: yup.string().required("Must enter an image URL"),
+        bio: yup.string().required("Must enter a bio")
+    });
+    const formik = useFormik({
+        initialValues: {
+            username: "",
+            password: "",
+            image_url: "",
+            bio: ""
+        },
+        validationSchema: formSchema,
+        onSubmit: (values) => {
+          fetch("/sign_up", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(values, null, 2),
+          }).then((res) => {
+            if (res.status == 201) {
+                console.log(res);
+                onSignUp(values)
+                history.push('/home')
+
+
+            //   setRefreshPage(!refreshPage)
+            }
+          });
+        },
+    });
     const handleChange = e => {
         console.log(e.target.name)
         setFormData({
@@ -43,15 +78,15 @@ function SignUp({ onSignUp }) {
     return (
         <div>
             <Header />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="username">Username: </label>
                 <input 
                     id="username" 
                     type="text" 
                     name="username"
                     placeholder="Username..."
-                    value={formData.username}
-                    onChange={handleChange}>
+                    value={formik.values.username}
+                    onChange={formik.handleChange}>
                 </input>
                 <br></br>
                 <label htmlFor="password">Password: </label>
@@ -60,8 +95,8 @@ function SignUp({ onSignUp }) {
                     type="text" 
                     name="password"
                     placeholder="Password..."
-                    value={formData.password}
-                    onChange={handleChange}>
+                    value={formik.values.password}
+                    onChange={formik.handleChange}>
                 </input>
                 <br></br>
                 <label htmlFor="image_url">Image URL: </label>
@@ -70,8 +105,8 @@ function SignUp({ onSignUp }) {
                     type="text"
                     name="image_url"
                     placeholder="Image URL..."
-                    value={formData.image_url}
-                    onChange={handleChange}>
+                    value={formik.values.image_url}
+                    onChange={formik.handleChange}>
                 </input>
                 <br></br>
                 <label htmlFor="bio">Bio: </label>
@@ -80,8 +115,8 @@ function SignUp({ onSignUp }) {
                     type="text"
                     name="bio"
                     placeholder="bio"
-                    value={formData.bio}
-                    onChange={handleChange}>
+                    value={formik.values.bio}
+                    onChange={formik.handleChange}>
                 </input>
                 <br></br>
                 <button id="subBtn" type="submit">Sign Up</button>
