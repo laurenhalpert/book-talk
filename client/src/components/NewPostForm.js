@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+// NEEDS formik
 function NewPostForm({ user, book, onAddPost, posts }) {
     const [formData, setFormData] = useState({
         user_id: user.id,
