@@ -9,7 +9,7 @@ function MyNavBar({ onLogOut, user }){
     
 
     return (
-        <div id="myNavBar" class="nav">
+        <div id="myNavBar" className="nav">
             <LogOut onLogOut={onLogOut} user={user} />
             <span><NavLink to="/book_index" exact>
                 Book Index

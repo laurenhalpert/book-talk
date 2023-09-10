@@ -3,14 +3,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 // NEEDS formik
 function NewBookForm({ addNewBook }) {
-    const [formData, setFormData] = useState({
-        title: "",
-        author_first_name:"",
-        author_last_name:"",
-        genre: "",
-        book_image:"",
-        description:""
-    })
+    // const [formData, setFormData] = useState({
+    //     title: "",
+    //     author_first_name:"",
+    //     author_last_name:"",
+    //     genre: "",
+    //     book_image:"",
+    //     description:""
+    // })
     const formSchema = yup.object().shape({
         title: yup.string().required("Must enter a title"),
         author_first_name: yup.string().required("Must enter author's first name"),
@@ -39,9 +39,11 @@ function NewBookForm({ addNewBook }) {
             },
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
-            if (res.status == 200) {
+            if (res.status == 201) {
                 console.log(res);
                 console.log(values)
+                addNewBook(values)
+                // Why key error?
                 
 
 
@@ -51,35 +53,35 @@ function NewBookForm({ addNewBook }) {
         },
     });
 
-    const handleChange = e => {
-        console.log(e.target.name)
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value
-        })
-    }
-    function handleSubmit(e){
-        e.preventDefault();
-        console.log('submitted')
-        fetch('/book_index', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(r=>r.json())
-        .then(book => addNewBook(book))
+    // const handleChange = e => {
+    //     console.log(e.target.name)
+    //     setFormData({
+    //         ...formData,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+    // function handleSubmit(e){
+    //     e.preventDefault();
+    //     console.log('submitted')
+    //     fetch('/book_index', {
+    //         method: "POST",
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         },
+    //         body: JSON.stringify(formData)
+    //     })
+    //     .then(r=>r.json())
+    //     .then(book => addNewBook(book))
 
-        setFormData({
-            title: "",
-            author_first_name:"",
-            author_last_name:"",
-            genre: "",
-            book_image:"",
-            description:""
-        })
-    }
+    //     setFormData({
+    //         title: "",
+    //         author_first_name:"",
+    //         author_last_name:"",
+    //         genre: "",
+    //         book_image:"",
+    //         description:""
+    //     })
+    // }
 
     return(
         <div>

@@ -199,6 +199,7 @@ class BookIndex(Resource):
         book_image = request.get_json()['book_image']
         description = request.get_json()['description']
         
+        
         try:
             book = Book( title=title, author_first_name=author_first_name, author_last_name=author_last_name, genre=genre, book_image=book_image, description=description)
             db.session.add(book)

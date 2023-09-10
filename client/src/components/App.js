@@ -140,10 +140,13 @@ function App() {
   //   })
   // }
   function handleNewBook(book) {
-    setBooks([
-      ...books,
-      book
-    ])
+    fetch('/book_index')
+    .then(r=>r.json())
+    .then(books => setBooks(books))
+    // setBooks([
+    //   ...books,
+    //   book
+    // ])
   }
 
   function handleRemove(id) {

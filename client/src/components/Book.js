@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 
 function Book({ book, myBooks, user, onAdd, onPostsClick }) {
     const history = useHistory();
-    
+    console.log(book.id)
     
     function handleClick(e) {
         console.log('clicked')
