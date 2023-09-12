@@ -3,7 +3,7 @@
 -Book Talk is a fullstack application utilizing React JS, Flask, and Python. Book Talk is a platform where users can make posts about a particular book and converse with each other through liking others' posts, creating a post of their own, or deleting a post they have made. A user can also add a book to "their books" for ease of access.
 ## The Set Up
 -This application has been seeded using faker, random choice, and an array of genres self-made
--The front end consists of many React components written in JavaScript
+-The front end consists of many React components written in JavaScript, and formik controlled forms
 -The back end consists of models (models.py), seeding (seed.py), configuration (config.py), and routing (app.py)
     -The models are used to create tables in the database via flask migrations
         -each table is built from a class
