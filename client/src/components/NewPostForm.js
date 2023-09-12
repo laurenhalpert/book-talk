@@ -9,14 +9,18 @@ function NewPostForm({ user, book, onAddPost, posts }) {
     //     likes: 0,
     //     post_content: ""
     // })
+
+
     const formSchema = yup.object().shape({
-        post_content: yup.string().required("Must enter content"),
-       
+        post_content: yup.string().required('must enter content'),
+        likes: yup.number()
     });
     const formik = useFormik({
         initialValues: {
             post_content: "",
-            
+            likes: 0,
+            user_id: user.id,
+            book_id: book.id,
         },
         // change fetch URL
         // update html with formik.values and formik.handles
@@ -32,8 +36,15 @@ function NewPostForm({ user, book, onAddPost, posts }) {
             if (res.status == 201) {
                 console.log(res);
                 console.log(values)
+                fetch(`/book_index/${book.id}`)
+                .then(r=>r.json())
+                .then(posts => {
+                onAddPost(posts)
                 
+                })
+                // onAddPost([...posts, values])
                 // Why key error?
+                // fetch again fresh posts for thisBook
                 
 
 
@@ -42,6 +53,40 @@ function NewPostForm({ user, book, onAddPost, posts }) {
           });
         },
     });
+
+
+
+
+
+
+
+    // const formSchema = yup.object().shape({
+    //     post_content: yup.string().required("Must enter content"),
+       
+    // });
+    // const formik = useFormik({
+    //     initialValues: {
+    //         post_content: "",
+            
+    //     },
+    //     // change fetch URL
+    //     // update html with formik.values and formik.handles
+    //     validationSchema: formSchema,
+    //     onSubmit: (values) => {
+    //       fetch(`/book_index/${book.id}`, {
+    //         method: "POST",
+    //         headers: {
+    //           "Content-Type": "application/json",
+    //         },
+    //         body: JSON.stringify(values, null, 2),
+    //       }).then((res) => {
+    //         if (res.status == 201) {
+    //             console.log(res);
+    //             console.log(values)
+    //         }
+    //       });
+    //     },
+    // });
     // const formSchema = yup.object().shape({
         
     //     post_content: yup.string().required("Must enter content"),
@@ -107,7 +152,7 @@ function NewPostForm({ user, book, onAddPost, posts }) {
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="newPost">New Post: </label>
-                <textarea id="newPost" name="newPost" placeholder="Thoughts..." value={formik.values.post_content} onChange={formik.handleChange} ></textarea>
+                <textarea id="newPost" name="post_content" placeholder="Thoughts..." value={formik.values.post_content} onChange={formik.handleChange} ></textarea>
                 <button id="submitBtn" type="submit" >Post</button>
             </form>
         </div>
