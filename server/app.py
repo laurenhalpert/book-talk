@@ -21,16 +21,26 @@ class SignUp(Resource):
         password = request.get_json()['password']
         image_url = request.get_json()['image_url']
         bio = request.get_json()['bio']
+        # username_check = User.query.filter(User.username == username).first()
+        # print(username_check)
+        # print(not username_check)
         if username:
+            try:
+                new_user = User(username=username, image_url=image_url, bio=bio)
+                new_user.password_hash = password
 
-            new_user = User(username=username, image_url=image_url, bio=bio)
-            new_user.password_hash = password
+                db.session.add(new_user)
+                db.session.commit()
 
-            db.session.add(new_user)
-            db.session.commit()
-
-            session['user_id'] = new_user.id
-            return new_user.to_dict(), 201
+                session['user_id'] = new_user.id
+                return new_user.to_dict(), 201
+            except: 
+                print('username not unique')
+                return {"error": "username not unique"}, 422
+        # elif username and (username_check == False):
+        #     alert('This username is already taken')
+        #     return {"error": "422 Unprocessable entity"}
+        # handle someone trying to sign up with a username that already exists
         return {"error": "422 Unprocessable entity"}, 422 
 
 class CheckSession(Resource):

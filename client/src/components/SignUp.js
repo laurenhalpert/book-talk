@@ -14,7 +14,7 @@ function SignUp({ onSignUp }) {
     // })
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username"),
-        password: yup.string().required("Must enter a valid password").max(15),
+        password: yup.string().required("Must enter a valid password").min(3),
         image_url: yup.string().required("Must enter an image URL"),
         bio: yup.string().required("Must enter a bio")
     });
@@ -41,6 +41,10 @@ function SignUp({ onSignUp }) {
 
 
             //   setRefreshPage(!refreshPage)
+            }
+            else if (res.status == 422) {
+               
+                alert('Username already taken.')
             }
           });
         },
@@ -88,6 +92,7 @@ function SignUp({ onSignUp }) {
                     value={formik.values.username}
                     onChange={formik.handleChange}>
                 </input>
+                <p style={{ color: "red" }}> {formik.errors.username}</p>
                 <br></br>
                 <label htmlFor="password">Password: </label>
                 <input 
@@ -98,6 +103,7 @@ function SignUp({ onSignUp }) {
                     value={formik.values.password}
                     onChange={formik.handleChange}>
                 </input>
+                <p style={{ color: "red" }}> {formik.errors.password}</p>
                 <br></br>
                 <label htmlFor="image_url">Image URL: </label>
                 <input
@@ -108,6 +114,7 @@ function SignUp({ onSignUp }) {
                     value={formik.values.image_url}
                     onChange={formik.handleChange}>
                 </input>
+                <p style={{ color: "red" }}> {formik.errors.image_url}</p>
                 <br></br>
                 <label htmlFor="bio">Bio: </label>
                 <input
@@ -118,6 +125,7 @@ function SignUp({ onSignUp }) {
                     value={formik.values.bio}
                     onChange={formik.handleChange}>
                 </input>
+                <p style={{ color: "red" }}> {formik.errors.bio}</p>
                 <br></br>
                 <button id="subBtn" type="submit">Sign Up</button>
             </form>

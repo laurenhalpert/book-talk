@@ -38,6 +38,9 @@ function LogIn({ onLogin }) {
 
             //   setRefreshPage(!refreshPage)
             }
+            else {
+                alert("error 401: unauthorized")
+            }
           });
         },
     });
@@ -88,6 +91,7 @@ function LogIn({ onLogin }) {
                     onChange={formik.handleChange}>
                 </input>
                 <br></br>
+                <p style={{ color: "red" }}> {formik.errors.username}</p>
                 <label htmlFor="passwordField">Password: </label>
                 <input 
                     id="passwordField" 
@@ -98,6 +102,7 @@ function LogIn({ onLogin }) {
                     onChange={formik.handleChange}>
                 </input>
                 <br></br>
+                <p style={{ color: "red" }}> {formik.errors.password}</p>
                 <button id="submitBtn" type="submit">Log In</button>
             </form>
             
