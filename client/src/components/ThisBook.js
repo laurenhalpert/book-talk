@@ -15,10 +15,10 @@ function ThisBook({ book, user, onLogOut }) {
           
         })
       }, [])
-    console.log(book)
+  
 
     function handleLike(updatedPost) {
-        console.log(updatedPost)
+        
         setPosts((posts)=>posts.map(post => post.id === updatedPost.id? updatedPost: post))
 
     }
@@ -39,8 +39,8 @@ function ThisBook({ book, user, onLogOut }) {
             </div>
             <div>
                 <h2 className="postsHeader">What people are saying...</h2>
-                {console.log(posts)}
-                {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
+                
+                {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): alert('No posts here') }
                 <br></br>
                 <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
             </div>
