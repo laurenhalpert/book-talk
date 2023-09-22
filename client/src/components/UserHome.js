@@ -3,7 +3,6 @@ import { Switch, Route, NavLink } from "react-router-dom";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
-// make user home page and create nav links for books, my books
 function UserHome({ user, onLogOut }){
     
     const [myBooks, setMyBooks] = useState([])
@@ -16,7 +15,7 @@ function UserHome({ user, onLogOut }){
           
         })
       }, [])
-    console.log(user)
+  
     return(
         <div>
             <Header />
