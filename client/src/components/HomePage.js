@@ -20,7 +20,6 @@ function HomePage({ onLogin }) {
             <div id="signup">
                 <p>Don't have an account? Sign up below.</p>
                 <button onClick={handleClick}>Sign Up</button>
-                {/* set up routing so that when "Sign Up" is clicked, the user is routed to the Sign Up page */} 
             </div>
         </div>
        
