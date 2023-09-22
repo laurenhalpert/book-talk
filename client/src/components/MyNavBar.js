@@ -1,6 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
-import { useHistory, BrowserRouter, Route, NavLink, Switch } from "react-router-dom";
+
+import { NavLink } from "react-router-dom";
 import LogOut from "./LogOut";
 
 

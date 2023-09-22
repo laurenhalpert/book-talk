@@ -77,11 +77,10 @@ function App() {
       
       setMyBookObj(bookObj)
       let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
-      let filteredMyBooks = books.filter(book=>{
-        for (let i=0; i< books.length; i++) {
-          return filteredMyBookObjs.includes(book.id)
-        }
-        
+      console.log(filteredMyBookObjs)
+      console.log(books)
+      let filteredMyBooks = books.filter((book) => {
+        return filteredMyBookObjs.includes(book.id)
       })
       
       setMyBooks(filteredMyBooks)

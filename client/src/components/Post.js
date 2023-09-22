@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 function Post({ post, user, book, onLike, onDelete }) {
 
     
 
     function handleClick(e){
-        let updatedPost = {
-            ...post,
-            likes: post.likes + 1
-        }
+      
         
         if (e.target.id === "likeBtn") {
             

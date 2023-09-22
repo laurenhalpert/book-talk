@@ -21,10 +21,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
       
     
 
-        const myBookObj ={
-            book_id: book.id,
-            user_id: user.id
-        }
+       
         
         fetch(`/my_book_index/${book.id}`, {
             method: "DELETE",
@@ -60,7 +57,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
             <button id="removeBtn" onClick={handleClick}>Remove from My Books</button>
             <div>
                 <h2>What people are saying...</h2>
-                {console.log(posts)}
+                
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
                 <br></br>
                 <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
