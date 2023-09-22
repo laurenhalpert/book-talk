@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
 
-# Standard library imports
+
 from random import random, randint, choice as rc
 
-# Remote library imports
+
 from faker import Faker
 
-# Local imports
 from app import app
 from models import db, User, Post, Book, MyBook
 
 from flask import session 
-# from sqlalchemy import create_engine
-# from sqlalchemy.orm import sessionmaker
 
-# engine = create_engine('sqlite:///book_talk.db')
-# Session = sessionmaker(bind=engine)
-# session = Session()
 
 def delete_records():
     db.session.query(Post).delete()
@@ -53,7 +47,7 @@ def create_records():
     users =[
         User(
             username = fake.unique.first_name(),
-            # password_hash = fake.color(),
+            
             image_url = fake.image_url(),
             bio = fake.text()
         ) for i in range (500)
@@ -92,7 +86,7 @@ if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
         print("Starting seed...")
-        # Seed code goes here!
+        
         delete_records()
         users, books, posts, my_books = create_records()
         relate_records(users, books, posts, my_books)
