@@ -5,10 +5,7 @@ import * as yup from "yup";
 
 function LogIn({ onLogin }) {
     const history = useHistory();
-    // const [formData, setFormData] = useState({
-    //     username: "",
-    //     password: ""
-    // });
+    
     const formSchema = yup.object().shape({
         username: yup.string().required("Must enter a username"),
         password: yup.string().required("Must enter a valid password").max(15)
@@ -17,8 +14,7 @@ function LogIn({ onLogin }) {
         initialValues: {
             username: "",
             password: "",
-            // image_url: "",
-            // bio: ""
+            
         },
         validationSchema: formSchema,
         onSubmit: (values) => {
@@ -30,13 +26,12 @@ function LogIn({ onLogin }) {
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
             if (res.status == 200) {
-                console.log(res);
-                console.log(values)
+               
                 onLogin(values)
                 history.push('/home')
 
 
-            //   setRefreshPage(!refreshPage)
+            
             }
             else {
                 alert("error 401: unauthorized")
@@ -46,38 +41,7 @@ function LogIn({ onLogin }) {
     });
     
     
-    // const handleChange=(e) =>{
-
-    //     setFormData({
-    //       ...formData,
-    //       [e.target.name]: e.target.value,
-    //     });
-        
-    // }
     
-    //   function handleSubmit(e) {
-    //     e.preventDefault();
-        
-    //     fetch("/log_in", {
-    //       method: "POST",
-    //       headers: {
-    //         "Access-Control-Allow-Origin": "*",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(formData),
-    //     })
-    //       .then((r) => {
-    //         if (r.ok){
-    //             r.json().then(user=> {
-    //                 onLogin(user);
-    //                 history.push("/home");
-    //             })
-    //         }
-    //         else {
-    //             r.json().then((err) => alert("401 Unauthorized. Please enter a valid username and password or sign up for an account."));
-    //         }
-    //       })
-    //   }
     return (
         <div id="logInForm">
             <form onSubmit={formik.handleSubmit}>
