@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -25,7 +25,7 @@ function LogIn({ onLogin }) {
             },
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
-            if (res.status == 200) {
+            if (res.status === 200) {
                
                 onLogin(values)
                 history.push('/home')

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
@@ -27,7 +27,7 @@ function NewPostForm({ user, book, onAddPost, posts }) {
             },
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
-            if (res.status == 201) {
+            if (res.status === 201) {
                 
                 fetch(`/book_index/${book.id}`)
                 .then(r=>r.json())

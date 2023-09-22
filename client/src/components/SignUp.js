@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -29,7 +29,7 @@ function SignUp({ onSignUp }) {
             },
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
-            if (res.status == 201) {
+            if (res.status === 201) {
                 
                 onSignUp(values)
                 history.push('/home')
@@ -37,7 +37,7 @@ function SignUp({ onSignUp }) {
 
             
             }
-            else if (res.status == 422) {
+            else if (res.status === 422) {
                
                 alert('Username already taken.')
             }
