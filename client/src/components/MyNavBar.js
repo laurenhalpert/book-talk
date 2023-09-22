@@ -20,5 +20,5 @@ function MyNavBar({ onLogOut, user }){
         </div>
     )
 }
-// make this proper links
+
 export default MyNavBar
