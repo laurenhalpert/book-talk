@@ -54,7 +54,7 @@ function NewPostForm({ user, book, onAddPost }) {
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="newPost">New Post: </label>
                 <textarea id="newPost" name="post_content" placeholder="Thoughts..." value={formik.values.post_content} onChange={formik.handleChange} ></textarea>
-                <button id="submitBtn" type="submit" >Post</button>
+                <button className="submitBtn" type="submit" >Post</button>
             </form>
         </div>
     )
