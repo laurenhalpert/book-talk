@@ -77,8 +77,7 @@ function App() {
       
       setMyBookObj(bookObj)
       let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
-      console.log(filteredMyBookObjs)
-      console.log(books)
+      
       let filteredMyBooks = books.filter((book) => {
         return filteredMyBookObjs.includes(book.id)
       })

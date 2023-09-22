@@ -24,7 +24,7 @@ function Post({ post, user, book, onLike, onDelete }) {
             
         }
         else {
-            console.log('deleted')
+            
             fetch(`/book_index/${book.id}/${post.id}`,{
                 method: "DELETE",
                 headers: {

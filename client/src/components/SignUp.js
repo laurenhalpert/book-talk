@@ -30,9 +30,9 @@ function SignUp({ onSignUp }) {
             body: JSON.stringify(values, null, 2),
           }).then((res) => {
             if (res.status === 201) {
-                
+                alert('Signup complete.')
                 onSignUp(values)
-                history.push('/home')
+                history.push('/')
 
 
             
