@@ -15,21 +15,17 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
           
         })
       }, [])
-    console.log(book)
+   
 
     function handleClick(e) {
-        console.log('clicked')
-        console.log(e.target.id)
-        console.log(book)
-        console.log(user)
+      
     
 
         const myBookObj ={
             book_id: book.id,
             user_id: user.id
         }
-        console.log(myBookObj)
-        console.log(book.id)
+        
         fetch(`/my_book_index/${book.id}`, {
             method: "DELETE",
             headers: {
@@ -37,12 +33,12 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
                 "Content-Type": "application/json",
             }
         } ) 
-        // getting error 400 bad request
+        
         .then(() => onRemove(book.id))
     }
 
     function handleLike(updatedPost) {
-        console.log(updatedPost)
+        
         setPosts((posts)=>posts.map(post => post.id === updatedPost.id? updatedPost: post))
 
     }
