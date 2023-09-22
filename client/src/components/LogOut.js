@@ -4,8 +4,7 @@ import { useHistory } from "react-router-dom";
 function LogOut({ onLogOut, user }) {
 
     function handleClick(e) {
-        // console.log("log out clicked")
-        // console.log(user)
+        
         fetch(`/log_out`, {
             method: 'DELETE',
             headers: {
@@ -13,8 +12,7 @@ function LogOut({ onLogOut, user }) {
             },
         })
         .then(() => onLogOut())
-        // console.log(user)
-        // review if this is right for delete and also want to useHistory back to homepage
+        
     }
 
     return (
