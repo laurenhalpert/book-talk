@@ -15,7 +15,7 @@ function App() {
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
-  // const [posts, setPosts] =useState([])
+  
   
   const [thisBook, setThisBook] = useState({
     id: "",
@@ -56,15 +56,7 @@ function App() {
     });
   }, []);
 
-  // if (user.id !== "") {
-  //   return <UserHome />
-  // }
-  // else {
-  //   return <HomePage onLogin={handleLogin}/>
-  // }
   
-
-  // ^yellow isn't working properly
 
   useEffect(()=>{
     fetch("/book_index")
@@ -82,7 +74,7 @@ function App() {
     fetch("/my_book_index")
     .then(r=>r.json())
     .then(bookObj => {
-      console.log(bookObj)
+      
       setMyBookObj(bookObj)
       let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
       let filteredMyBooks = books.filter(book=>{
@@ -91,21 +83,20 @@ function App() {
         }
         
       })
-      console.log(filteredMyBooks)
+      
       setMyBooks(filteredMyBooks)
     })
   }, [])
   
 
   function handleLogin(activeUser){
-    console.log(user)
-    // find a way to set user to user who matches activeUser.username
-    // fetch users setUser(users.filter(user=> user.username === activeUser.username))
+    
+    
     fetch('/log_in')
     .then(r=> r.json())
     .then(user=>setUser(user))
-    // setUser((user) => activeUser)
-    console.log(user)
+    
+    
     
   }
   function handleSignUp(user){
@@ -113,9 +104,9 @@ function App() {
   }
 
   function handleAdd(bookObj) {
-    console.log(bookObj.book_id)
+    
     const book = books.filter(book=> book.id === bookObj.book_id)
-    console.log(book)
+    
     setMyBooks([
       ...myBooks,
       book[0]
@@ -133,27 +124,18 @@ function App() {
     history.push('/')
   }
 
-  // function handleNewPost(post) {
-  //   setPosts({
-  //     ...posts,
-  //     post
-  //   })
-  // }
+ 
   function handleNewBook(book) {
     fetch('/book_index')
     .then(r=>r.json())
     .then(books => setBooks(books))
-    // setBooks([
-    //   ...books,
-    //   book
-    // ])
+    
   }
 
   function handleRemove(id) {
-    console.log(id)
-    console.log(myBooks)
+    
     const updatedMyBooks = myBooks.filter(book => book.id !== id)
-    console.log(updatedMyBooks)
+    
     setMyBooks(updatedMyBooks)
     history.push('/my_book_index')
   }
@@ -191,11 +173,3 @@ function App() {
 }
 
 export default App;
-
-
-// to dos:
-// -make it pretty
-// -make sure it's working correctly
-// -make README
-// -make walkthrough video
-// -write blog
