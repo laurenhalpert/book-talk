@@ -5,7 +5,7 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
 
-function MyBookIndex({ books, onAdd, user, onPostsClick, onLogOut, onRemove, onPicture }) {
+function MyBookIndex({ books, onLogOut, onPicture }) {
     const history = useHistory()
    
 
@@ -22,7 +22,7 @@ function MyBookIndex({ books, onAdd, user, onPostsClick, onLogOut, onRemove, onP
     return(
         <div>
             <Header />
-            <MyNavBar onLogOut={onLogOut} user={user} />
+            <MyNavBar onLogOut={onLogOut} />
             <br></br>
             {books.map(book=><img className="bookCover" key={book.id} id={book.id} src={book.book_image} alt="book cover" onClick={handleClick}></img>)}
         </div>

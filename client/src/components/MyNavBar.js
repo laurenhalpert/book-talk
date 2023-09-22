@@ -4,13 +4,13 @@ import { NavLink } from "react-router-dom";
 import LogOut from "./LogOut";
 
 
-function MyNavBar({ onLogOut, user }){
+function MyNavBar({ onLogOut }){
 
     
 
     return (
         <div id="myNavBar" className="nav">
-            <LogOut onLogOut={onLogOut} user={user} />
+            <LogOut onLogOut={onLogOut} />
             <span><NavLink to="/book_index" exact>
                 Book Index
             </NavLink></span>

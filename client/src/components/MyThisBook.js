@@ -46,7 +46,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
     return(
         <div className="bookMoreInfo">
             <Header />
-            <MyNavBar onLogOut={onLogOut} user={user} />
+            <MyNavBar onLogOut={onLogOut} />
             <div className="bookInfo">
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>

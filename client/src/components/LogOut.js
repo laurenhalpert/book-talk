@@ -1,7 +1,7 @@
 import React from "react";
 
 
-function LogOut({ onLogOut, user }) {
+function LogOut({ onLogOut }) {
 
     function handleClick(e) {
         

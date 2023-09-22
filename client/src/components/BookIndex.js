@@ -9,7 +9,7 @@ function BookIndex({ books, myBooks, onAdd, user, onPostsClick, onLogOut, addNew
     return(
         <div>
             <Header />
-            <MyNavBar onLogOut={onLogOut} user={user} />
+            <MyNavBar onLogOut={onLogOut} />
             <br></br>
             {books.map(book=><Book key={book.id} book={book} myBooks={myBooks} onAdd={onAdd} user={user} onPostsClick={onPostsClick} />)
             }

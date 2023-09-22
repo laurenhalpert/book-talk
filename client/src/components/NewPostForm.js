@@ -2,7 +2,7 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function NewPostForm({ user, book, onAddPost, posts }) {
+function NewPostForm({ user, book, onAddPost }) {
    
 
 

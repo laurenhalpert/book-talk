@@ -155,7 +155,7 @@ function App() {
           <BookIndex books={books} myBooks={myBooks} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex user={user} books={myBooks} onAdd={handleAdd} onLogOut={handleLogOut} onPostsClick={setThisBook}  onRemove={handleRemove} onPicture={setMyThisBook} />
+          <MyBookIndex  books={myBooks} onLogOut={handleLogOut} onPicture={setMyThisBook} />
         </Route>
         <Route exact path="/book_index/:id">
           <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />

@@ -29,7 +29,7 @@ function ThisBook({ book, user, onLogOut }) {
     return(
         <div className="bookMoreInfo">
             <Header />
-            <MyNavBar onLogOut={onLogOut} user={user} />
+            <MyNavBar onLogOut={onLogOut} />
             <div className="bookInfo">
                 <img className="bookCover" src={book.book_image} alt="book cover"></img>
                 <h2>{book.title}</h2>
@@ -42,7 +42,7 @@ function ThisBook({ book, user, onLogOut }) {
                 
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): alert('No posts here') }
                 <br></br>
-                <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
+                <NewPostForm user={user} book={book} onAddPost={setPosts} />
             </div>
             
 
