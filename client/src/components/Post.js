@@ -9,9 +9,9 @@ function Post({ post, user, book, onLike, onDelete }) {
             ...post,
             likes: post.likes + 1
         }
-        console.log(updatedPost)
+        
         if (e.target.id === "likeBtn") {
-            console.log('liked')
+            
             fetch(`/book_index/${book.id}/${post.id}`,{
                 method: "PATCH",
                 headers: {
@@ -24,7 +24,7 @@ function Post({ post, user, book, onLike, onDelete }) {
 
 
             
-            // set likes state, patch post, add like column to Post in backend
+            
         }
         else {
             console.log('deleted')
@@ -37,7 +37,7 @@ function Post({ post, user, book, onLike, onDelete }) {
             
             .then(() => onDelete(post.id))
         }
-        // delete post, set posts 
+        
     }
 
   
@@ -46,7 +46,6 @@ function Post({ post, user, book, onLike, onDelete }) {
             <p>{post.post_content}</p>
             <button id="likeBtn" onClick={handleClick}>{post.likes} Like</button>
             {user.id === post.user_id ? <button id="delBtn" onClick={handleClick}>Delete</button> : null}
-            
         </div>
     )
 }
