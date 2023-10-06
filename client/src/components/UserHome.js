@@ -3,10 +3,12 @@ import React from "react";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 
-function UserHome({ user, onLogOut }){
+import { useSelector } from 'react-redux';
+
+function UserHome({ onLogOut }){
     
-    
-  
+    const user = useSelector((state) => state.user)
+    console.log(user['username'])
     return(
         <div>
             <Header />

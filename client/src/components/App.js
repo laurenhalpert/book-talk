@@ -10,7 +10,11 @@ import MyBookIndex from "./MyBookIndex";
 import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
+import { useDispatch, useSelector } from 'react-redux';
+import { logIn, logOut } from "../actions";
+
 function App() {
+  const dispatch = useDispatch()
   const history = useHistory();
   const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
@@ -37,24 +41,26 @@ function App() {
     description: ""
   })
 
-  const [user, setUser] = useState({
-    id: "",
-    username: "",
-    image_url: "",
-    bio: ""
-  })
+  // const [user, setUser] = useState({
+  //   id: "",
+  //   username: "",
+  //   image_url: "",
+  //   bio: ""
+  // })
   
-  useEffect(() => {
+ 
+  
+  // useEffect(() => {
     
-    fetch(`/check_session`).then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-      else {
-        r.json().then(()=> <HomePage onLogin={handleLogin} />)
-      }
-    });
-  }, []);
+  //   fetch(`/check_session`).then((r) => {
+  //     if (r.ok) {
+  //       r.json().then((user) => setUser(user));
+  //     }
+  //     else {
+  //       r.json().then(()=> <HomePage onLogin={handleLogin} />)
+  //     }
+  //   });
+  // }, []);
 
   
 
@@ -92,13 +98,14 @@ function App() {
     
     fetch('/log_in')
     .then(r=> r.json())
-    .then(user=>setUser(user))
+    .then(user=>dispatch(logIn(user)))
     
     
     
   }
   function handleSignUp(user){
-    setUser(user)
+    // setUser(user)
+    dispatch(logIn(user))
   }
 
   function handleAdd(bookObj) {
@@ -113,12 +120,13 @@ function App() {
   }
 
   function handleLogOut() {
-    setUser({
-      id: "",
-      username: "",
-      image_url: "",
-      bio: ""
-    })
+    // setUser({
+    //   id: "",
+    //   username: "",
+    //   image_url: "",
+    //   bio: ""
+    // })
+    dispatch(logOut())
     history.push('/')
   }
 
@@ -137,7 +145,9 @@ function App() {
     setMyBooks(updatedMyBooks)
     history.push('/my_book_index')
   }
-
+  
+  // const user=useSelector(state => state.user)
+  
   return (
     <div>
       <Switch>
@@ -145,22 +155,22 @@ function App() {
           <HomePage onLogin={handleLogin}/>
         </Route>
         <Route path="/home">
-          <UserHome user={user} onLogOut={handleLogOut} />
+          <UserHome  onLogOut={handleLogOut} />
         </Route>
         <Route path="/signup">
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} myBooks={myBooks} onAdd={handleAdd} user={user} onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
+          <BookIndex books={books} myBooks={myBooks} onAdd={handleAdd}  onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
           <MyBookIndex  books={myBooks} onLogOut={handleLogOut} onPicture={setMyThisBook} />
         </Route>
         <Route exact path="/book_index/:id">
-          <ThisBook book={thisBook} user={user} onLogOut={handleLogOut} />
+          <ThisBook book={thisBook}  onLogOut={handleLogOut} />
         </Route>
         <Route exact path ="/my_book_index/:my_id">
-          <MyThisBook book={myThisBook} user={user} onLogOut={handleLogOut} onRemove={handleRemove} />
+          <MyThisBook book={myThisBook}  onLogOut={handleLogOut} onRemove={handleRemove} />
         </Route>
       </Switch>
       

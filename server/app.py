@@ -230,6 +230,22 @@ class ThisBookPost (Resource):
         return {}, 204
 
 
+# route: /api/book_posts/<int:n>
+# get all books that have n or more number of posts 
+# class BookPosts (Resource):
+#     def get (self, n):
+#         books= Book.query.all()
+#         filtered_books = filter(lambda book: len(book.posts) >= n, books)
+#         return [book.to_dict() for book in filtered_books], 200
+#         # for (let i = 0, i< len(books), )
+#         # for book in books:
+#         #     if len(book.posts) >= n:
+#         #         print(len(book.posts))
+#         #     return book.to_dict(), 200
+#         # books = Book.query.filter(len(Book.posts) >= n).all()
+#         # return [book.to_dict() for book in books], 200
+
+
 api.add_resource(SignUp, '/api/sign_up', endpoint='sign_up')
 api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
 api.add_resource(LogIn, '/api/log_in', endpoint = 'log_in')
@@ -240,6 +256,7 @@ api.add_resource(ThisMyBookPost, '/api/my_book_index/<int:my_id>/<int:my_post_id
 api.add_resource(BookIndex, '/api/book_index', endpoint ='book_index')
 api.add_resource(ThisBook, '/api/book_index/<int:id>', endpoint = 'id')
 api.add_resource(ThisBookPost, '/api/book_index/<int:id>/<int:post_id>', endpoint = 'post_id')
+# api.add_resource(BookPosts, '/api/book_posts/<int:n>', endpoint="n")
 
 
 if __name__ == '__main__':
