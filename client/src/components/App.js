@@ -11,13 +11,13 @@ import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn, logOut, getBooks, getMyBooks } from "../actions";
+import { logIn, logOut, getBooks, getMyBooks, getMyBookObj } from "../actions";
 
 function App() {
   const dispatch = useDispatch()
   const history = useHistory();
   // const [books, setBooks] = useState([])
-  const [myBookObj, setMyBookObj] = useState([])
+  // const [myBookObj, setMyBookObj] = useState([])
   // const [myBooks, setMyBooks] = useState([])
   
   
@@ -76,13 +76,14 @@ function App() {
 
 
   const books= useSelector(state => state.books)
-
+  const myBookObj = useSelector(state => state.myBookObj)
   useEffect(()=>{
     fetch("/my_book_index")
     .then(r=>r.json())
     .then(bookObj => {
       
-      setMyBookObj(bookObj)
+      dispatch(getMyBookObj(bookObj))
+      
       let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
       
       let filteredMyBooks = books.filter((book) => {
