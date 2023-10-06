@@ -3,10 +3,12 @@ import { useHistory } from "react-router-dom";
 
 import { useSelector } from 'react-redux';
 
-function Book({ book, myBooks, onAdd, onPostsClick }) {
+function Book({ book, onAdd, onPostsClick }) {
     const history = useHistory();
     
     const user=useSelector(state => state.user)
+    const myBooks = useSelector(state=> state.myBooks)
+    
     function handleClick(e) {
         
         let myBook = myBooks.filter(item => item.title === book.title)[0]

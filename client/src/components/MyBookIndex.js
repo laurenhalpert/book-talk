@@ -4,10 +4,13 @@ import Header from "./Header";
 
 import MyNavBar from "./MyNavBar";
 
+import { useSelector } from "react-redux";
 
-function MyBookIndex({ books, onLogOut, onPicture }) {
+
+function MyBookIndex({ onLogOut, onPicture }) {
     const history = useHistory()
    
+    const books = useSelector(state=> state.myBooks)
 
     function handleClick(e) {
         

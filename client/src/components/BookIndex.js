@@ -6,8 +6,9 @@ import NewBookForm from "./NewBookForm";
 
 import { useSelector } from 'react-redux';
 
-function BookIndex({  myBooks, onAdd, onPostsClick, onLogOut, addNewBook }){
+function BookIndex({ onAdd, onPostsClick, onLogOut, addNewBook }){
     const books = useSelector(state => state.books)
+    const myBooks = useSelector(state=> state.myBooks)
     console.log(books)
     return(
         <div>
