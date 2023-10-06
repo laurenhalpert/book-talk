@@ -11,14 +11,14 @@ import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn, logOut, getBooks } from "../actions";
+import { logIn, logOut, getBooks, getMyBooks } from "../actions";
 
 function App() {
   const dispatch = useDispatch()
   const history = useHistory();
   // const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
-  const [myBooks, setMyBooks] = useState([])
+  // const [myBooks, setMyBooks] = useState([])
   
   
   const [thisBook, setThisBook] = useState({
@@ -89,7 +89,7 @@ function App() {
         return filteredMyBookObjs.includes(book.id)
       })
       
-      setMyBooks(filteredMyBooks)
+      dispatch(getMyBooks(filteredMyBooks))
     })
   }, [])
   
@@ -108,15 +108,15 @@ function App() {
     // setUser(user)
     dispatch(logIn(user))
   }
-
+  const myBooks= useSelector(state=>state.myBooks)
   function handleAdd(bookObj) {
     
     const book = books.filter(book=> book.id === bookObj.book_id)
     
-    setMyBooks([
+    dispatch(getMyBooks([
       ...myBooks,
       book[0]
-    ])
+    ]))
     
   }
 
@@ -143,7 +143,7 @@ function App() {
     
     const updatedMyBooks = myBooks.filter(book => book.id !== id)
     
-    setMyBooks(updatedMyBooks)
+    dispatch(getMyBooks(updatedMyBooks))
     history.push('/my_book_index')
   }
   

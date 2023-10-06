@@ -4,9 +4,11 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 import NewPostForm from "./NewPostForm";
 
-function ThisBook({ book, user, onLogOut }) {
+import { useSelector } from "react-redux";
+
+function ThisBook({ book, onLogOut }) {
     const [posts, setPosts] =useState([])
-    
+    const user=useSelector(state => state.user)
     useEffect(()=>{
         fetch(`/book_index/${book.id}`)
         .then(r=>r.json())

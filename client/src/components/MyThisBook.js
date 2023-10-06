@@ -4,9 +4,11 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 import NewPostForm from "./NewPostForm";
 
-function MyThisBook({ book, user, onLogOut, onRemove }) {
+import { useSelector } from "react-redux";
+
+function MyThisBook({ book, onLogOut, onRemove }) {
     const [posts, setPosts] =useState([])
-    
+    const user=useSelector(state => state.user)
     useEffect(()=>{
         fetch(`/book_index/${book.id}`)
         .then(r=>r.json())
@@ -60,7 +62,7 @@ function MyThisBook({ book, user, onLogOut, onRemove }) {
                 
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
                 <br></br>
-                <NewPostForm user={user} book={book} onAddPost={setPosts} posts={posts}/>
+                <NewPostForm user={user} book={book} onAddPost={setPosts} />
             </div>
             
 

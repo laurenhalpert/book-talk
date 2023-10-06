@@ -17,3 +17,10 @@ export const getBooks= (books)=>{
         payload: books
     }
 }
+
+export const getMyBooks=(books) => {
+    return{
+        type: "GET_MY_BOOKS",
+        payload: books
+    }
+}
