@@ -4,8 +4,11 @@ import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 import NewBookForm from "./NewBookForm";
 
-function BookIndex({ books, myBooks, onAdd, user, onPostsClick, onLogOut, addNewBook }){
-    
+import { useSelector } from 'react-redux';
+
+function BookIndex({  myBooks, onAdd, user, onPostsClick, onLogOut, addNewBook }){
+    const books = useSelector(state => state.books)
+    console.log(books)
     return(
         <div>
             <Header />

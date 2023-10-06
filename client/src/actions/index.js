@@ -10,3 +10,10 @@ export const logOut=() => {
         type:'LOG_OUT'
     }
 }
+
+export const getBooks= (books)=>{
+    return{
+        type: "GET_BOOKS",
+        payload: books
+    }
+}

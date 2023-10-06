@@ -11,12 +11,12 @@ import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn, logOut } from "../actions";
+import { logIn, logOut, getBooks } from "../actions";
 
 function App() {
   const dispatch = useDispatch()
   const history = useHistory();
-  const [books, setBooks] = useState([])
+  // const [books, setBooks] = useState([])
   const [myBookObj, setMyBookObj] = useState([])
   const [myBooks, setMyBooks] = useState([])
   
@@ -68,13 +68,14 @@ function App() {
     fetch("/book_index")
     .then(r=>r.json())
     .then(books => {
-      setBooks(books)
+      // setBooks(books)
+      dispatch(getBooks(books))
       
     })
   }, [])
 
 
-  
+  const books= useSelector(state => state.books)
 
   useEffect(()=>{
     fetch("/my_book_index")
@@ -134,7 +135,7 @@ function App() {
   function handleNewBook(book) {
     fetch('/book_index')
     .then(r=>r.json())
-    .then(books => setBooks(books))
+    .then(books => dispatch(getBooks(books)))
     
   }
 
@@ -161,7 +162,7 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex books={books} myBooks={myBooks} onAdd={handleAdd}  onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
+          <BookIndex myBooks={myBooks} onAdd={handleAdd}  onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
           <MyBookIndex  books={myBooks} onLogOut={handleLogOut} onPicture={setMyThisBook} />
