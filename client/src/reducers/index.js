@@ -5,6 +5,7 @@ import myBooksReducer from "./myBooks";
 import myBookObjReducer from "./myBookObj";
 import thisBookReducer from "./thisBook";
 import myThisBookReducer from "./myThisBook";
+import postsReducer from "./posts";
 
 const allReducers= combineReducers({
     user: userReducer,
@@ -12,7 +13,8 @@ const allReducers= combineReducers({
     myBooks: myBooksReducer,
     myBookObj: myBookObjReducer,
     thisBook: thisBookReducer,
-    myThisBook: myThisBookReducer
+    myThisBook: myThisBookReducer,
+    posts: postsReducer
 })
 
 export default allReducers

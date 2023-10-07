@@ -1,24 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Post from "./Post";
 import Header from "./Header";
 import MyNavBar from "./MyNavBar";
 import NewPostForm from "./NewPostForm";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getPosts } from "../actions";
 
 function MyThisBook({ onLogOut, onRemove }) {
-    const [posts, setPosts] =useState([])
+    // const [posts, setPosts] =useState([])
+    const dispatch = useDispatch()
     const user=useSelector(state => state.user)
     const book = useSelector(state=>state.myThisBook)
+    const posts = useSelector(state => state.posts)
     useEffect(()=>{
         fetch(`/book_index/${book.id}`)
         .then(r=>r.json())
         .then(posts => {
-          setPosts(posts)
+          dispatch(getPosts(posts))
           
         })
       }, [])
-   
+    
 
     function handleClick(e) {
       
@@ -39,12 +42,15 @@ function MyThisBook({ onLogOut, onRemove }) {
 
     function handleLike(updatedPost) {
         
-        setPosts((posts)=>posts.map(post => post.id === updatedPost.id? updatedPost: post))
+        dispatch(getPosts((posts)=>posts.map(post => post.id === updatedPost.id? updatedPost: post)))
 
     }
     function handleDelete(id){
         const updatedPostsArray = posts.filter(post=> post.id !== id)
-        setPosts(updatedPostsArray)
+        dispatch(getPosts(updatedPostsArray))
+    }
+    function handleAddPost(posts) {
+        dispatchEvent(getPosts(posts))
     }
     return(
         <div className="bookMoreInfo">
@@ -63,7 +69,7 @@ function MyThisBook({ onLogOut, onRemove }) {
                 
                 {posts? posts.map(post => <Post key={post.id} post={post} user={user} book={book} onLike={handleLike} onDelete={handleDelete} />): console.log('no posts here') }
                 <br></br>
-                <NewPostForm user={user} book={book} onAddPost={setPosts} />
+                <NewPostForm user={user} book={book} onAddPost={handleAddPost} />
             </div>
             
 

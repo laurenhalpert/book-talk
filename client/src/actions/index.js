@@ -45,3 +45,10 @@ export const getMyThisBook=(obj) => {
         payload: obj
     }
 }
+
+export const getPosts = (posts) => {
+    return {
+        type: "GET_POSTS",
+        payload: posts
+    }
+}
