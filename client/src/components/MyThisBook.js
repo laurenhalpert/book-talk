@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPosts } from "../actions";
 
 function MyThisBook({ onLogOut, onRemove }) {
-    // const [posts, setPosts] =useState([])
+    
     const dispatch = useDispatch()
     const user=useSelector(state => state.user)
     const book = useSelector(state=>state.myThisBook)

@@ -9,7 +9,6 @@ import { getPosts } from "../actions";
 
 function ThisBook({ onLogOut }) {
     const dispatch= useDispatch()
-    // const [posts, setPosts] =useState([])
     const user=useSelector(state => state.user)
     const book = useSelector(state => state.thisBook)
     const posts = useSelector(state => state.posts)

@@ -16,54 +16,7 @@ import { logIn, logOut, getBooks, getMyBooks, getMyBookObj, getThisBook, getMyTh
 function App() {
   const dispatch = useDispatch()
   const history = useHistory();
-  // const [books, setBooks] = useState([])
-  // const [myBookObj, setMyBookObj] = useState([])
-  // const [myBooks, setMyBooks] = useState([])
   
-  
-  // const [thisBook, setThisBook] = useState({
-  //   id: "",
-  //   title: "",
-  //   author_first_name: "",
-  //   author_last_name: "",
-  //   genre: "",
-  //   book_image: "",
-  //   description: ""
-  // })
-
-  // const [myThisBook, setMyThisBook] = useState({
-  //   id: "",
-  //   title: "",
-  //   author_first_name: "",
-  //   author_last_name: "",
-  //   genre: "",
-  //   book_image: "",
-  //   description: ""
-  // })
-
-  // const [user, setUser] = useState({
-  //   id: "",
-  //   username: "",
-  //   image_url: "",
-  //   bio: ""
-  // })
-  
- 
-  
-  // useEffect(() => {
-    
-  //   fetch(`/check_session`).then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => setUser(user));
-  //     }
-  //     else {
-  //       r.json().then(()=> <HomePage onLogin={handleLogin} />)
-  //     }
-  //   });
-  // }, []);
-
-  
-  // let setBooks = dispatch(getBooks())
  
   useEffect(()=>{
     
@@ -79,7 +32,7 @@ function App() {
  
 
   const books= useSelector(state => state.books)
-  // let setMyBookObj = dispatch(getMyBookObj())
+  
   const myBookObj = useSelector(state => state.myBookObj)
   useEffect(()=>{
     fetch("/my_book_index")
@@ -97,15 +50,7 @@ function App() {
       dispatch(getMyBooks(filteredMyBooks))
     })
   }, [])
-  // const user = useSelector(state => state.user)
-  // console.log(user.books)
-  // let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
-      
-  // let filteredMyBooks = books.filter((book) => {
-  //   return filteredMyBookObjs.includes(book.id)
-  // })
-  
-  // dispatch(getMyBooks(filteredMyBooks))
+
 
   function handleLogin(activeUser){
     
@@ -118,7 +63,7 @@ function App() {
     
   }
   function handleSignUp(user){
-    // setUser(user)
+    
     dispatch(logIn(user))
   }
   const myBooks= useSelector(state=>state.myBooks)
@@ -134,12 +79,7 @@ function App() {
   }
 
   function handleLogOut() {
-    // setUser({
-    //   id: "",
-    //   username: "",
-    //   image_url: "",
-    //   bio: ""
-    // })
+    
     dispatch(logOut())
     history.push('/')
   }
@@ -168,7 +108,7 @@ function App() {
     dispatch(getMyThisBook(bookObj))
   }
   
-  // const user=useSelector(state => state.user)
+ 
   
   return (
     <div>
