@@ -11,7 +11,7 @@ import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn, logOut, getBooks, getMyBooks, getMyBookObj, getThisBook } from "../actions";
+import { logIn, logOut, getBooks, getMyBooks, getMyBookObj, getThisBook, getMyThisBook } from "../actions";
 
 function App() {
   const dispatch = useDispatch()
@@ -31,15 +31,15 @@ function App() {
   //   description: ""
   // })
 
-  const [myThisBook, setMyThisBook] = useState({
-    id: "",
-    title: "",
-    author_first_name: "",
-    author_last_name: "",
-    genre: "",
-    book_image: "",
-    description: ""
-  })
+  // const [myThisBook, setMyThisBook] = useState({
+  //   id: "",
+  //   title: "",
+  //   author_first_name: "",
+  //   author_last_name: "",
+  //   genre: "",
+  //   book_image: "",
+  //   description: ""
+  // })
 
   // const [user, setUser] = useState({
   //   id: "",
@@ -163,6 +163,11 @@ function App() {
     console.log(bookObj)
     dispatch(getThisBook(bookObj))
   }
+
+  function handleOnPicture(bookObj) {
+    dispatch(getMyThisBook(bookObj))
+  }
+  
   // const user=useSelector(state => state.user)
   
   return (
@@ -181,13 +186,13 @@ function App() {
           <BookIndex  onAdd={handleAdd}  onPostsClick={handlePostsClick} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex  onLogOut={handleLogOut} onPicture={setMyThisBook} />
+          <MyBookIndex  onLogOut={handleLogOut} onPicture={handleOnPicture} />
         </Route>
         <Route exact path="/book_index/:id">
           <ThisBook onLogOut={handleLogOut} />
         </Route>
         <Route exact path ="/my_book_index/:my_id">
-          <MyThisBook book={myThisBook}  onLogOut={handleLogOut} onRemove={handleRemove} />
+          <MyThisBook onLogOut={handleLogOut} onRemove={handleRemove} />
         </Route>
       </Switch>
       
