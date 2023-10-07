@@ -23,8 +23,7 @@ function ThisBook({ onLogOut }) {
   
 
     function handleLike(updatedPost) {
-        console.log(posts)
-        console.log(updatedPost)
+        
         let postsLikes = posts.map(post => post.id === updatedPost.id? updatedPost: post)
         dispatch(getPosts(postsLikes))
 

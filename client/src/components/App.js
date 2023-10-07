@@ -23,7 +23,7 @@ function App() {
     fetch("/book_index")
     .then(r=>r.json())
     .then(books => {
-      console.log(books)
+      
       dispatch(getBooks(books))
       
     })
@@ -100,7 +100,7 @@ function App() {
     history.push('/my_book_index')
   }
   function handlePostsClick(bookObj) {
-    console.log(bookObj)
+    
     dispatch(getThisBook(bookObj))
   }
 

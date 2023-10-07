@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 function BookIndex({ onAdd, onPostsClick, onLogOut, addNewBook }){
     const books = useSelector(state => state.books)
     
-    console.log(books)
+    
     return(
         <div>
             <Header />
