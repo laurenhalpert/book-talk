@@ -8,14 +8,14 @@ import { useSelector } from 'react-redux';
 
 function BookIndex({ onAdd, onPostsClick, onLogOut, addNewBook }){
     const books = useSelector(state => state.books)
-    const myBooks = useSelector(state=> state.myBooks)
+    
     console.log(books)
     return(
         <div>
             <Header />
             <MyNavBar onLogOut={onLogOut} />
             <br></br>
-            {books.map(book=><Book key={book.id} book={book} myBooks={myBooks} onAdd={onAdd} onPostsClick={onPostsClick} />)
+            {books.map(book=><Book key={book.id} book={book} onAdd={onAdd} onPostsClick={onPostsClick} />)
             }
             <h3 id="newBookHeader">Don't see what you're looking for? Create a book!</h3>
             <NewBookForm addNewBook={addNewBook}/>

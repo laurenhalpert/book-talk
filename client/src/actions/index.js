@@ -31,3 +31,10 @@ export const getMyBookObj=(obj) => {
         payload: obj
     }
 }
+
+export const getThisBook=(obj) => {
+    return {
+        type: "GET_THIS_BOOK",
+        payload: obj
+    }
+}

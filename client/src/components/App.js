@@ -11,7 +11,7 @@ import ThisBook from "./ThisBook";
 import MyThisBook from "./MyThisBook";
 
 import { useDispatch, useSelector } from 'react-redux';
-import { logIn, logOut, getBooks, getMyBooks, getMyBookObj } from "../actions";
+import { logIn, logOut, getBooks, getMyBooks, getMyBookObj, getThisBook } from "../actions";
 
 function App() {
   const dispatch = useDispatch()
@@ -21,15 +21,15 @@ function App() {
   // const [myBooks, setMyBooks] = useState([])
   
   
-  const [thisBook, setThisBook] = useState({
-    id: "",
-    title: "",
-    author_first_name: "",
-    author_last_name: "",
-    genre: "",
-    book_image: "",
-    description: ""
-  })
+  // const [thisBook, setThisBook] = useState({
+  //   id: "",
+  //   title: "",
+  //   author_first_name: "",
+  //   author_last_name: "",
+  //   genre: "",
+  //   book_image: "",
+  //   description: ""
+  // })
 
   const [myThisBook, setMyThisBook] = useState({
     id: "",
@@ -63,26 +63,30 @@ function App() {
   // }, []);
 
   
-
+  // let setBooks = dispatch(getBooks())
+ 
   useEffect(()=>{
+    
     fetch("/book_index")
     .then(r=>r.json())
     .then(books => {
-      // setBooks(books)
+      console.log(books)
       dispatch(getBooks(books))
       
     })
+    
   }, [])
-
+ 
 
   const books= useSelector(state => state.books)
+  // let setMyBookObj = dispatch(getMyBookObj())
   const myBookObj = useSelector(state => state.myBookObj)
   useEffect(()=>{
     fetch("/my_book_index")
     .then(r=>r.json())
     .then(bookObj => {
-      
       dispatch(getMyBookObj(bookObj))
+     
       
       let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
       
@@ -93,7 +97,15 @@ function App() {
       dispatch(getMyBooks(filteredMyBooks))
     })
   }, [])
+  // const user = useSelector(state => state.user)
+  // console.log(user.books)
+  // let filteredMyBookObjs = myBookObj.map(obj=> obj.book_id)
+      
+  // let filteredMyBooks = books.filter((book) => {
+  //   return filteredMyBookObjs.includes(book.id)
+  // })
   
+  // dispatch(getMyBooks(filteredMyBooks))
 
   function handleLogin(activeUser){
     
@@ -147,7 +159,10 @@ function App() {
     dispatch(getMyBooks(updatedMyBooks))
     history.push('/my_book_index')
   }
-  
+  function handlePostsClick(bookObj) {
+    console.log(bookObj)
+    dispatch(getThisBook(bookObj))
+  }
   // const user=useSelector(state => state.user)
   
   return (
@@ -163,13 +178,13 @@ function App() {
           <SignUp onSignUp={handleSignUp}/>
         </Route>
         <Route exact path="/book_index">
-          <BookIndex myBooks={myBooks} onAdd={handleAdd}  onPostsClick={setThisBook} onLogOut={handleLogOut} addNewBook={handleNewBook} />
+          <BookIndex  onAdd={handleAdd}  onPostsClick={handlePostsClick} onLogOut={handleLogOut} addNewBook={handleNewBook} />
         </Route>
         <Route exact path="/my_book_index">
-          <MyBookIndex  books={myBooks} onLogOut={handleLogOut} onPicture={setMyThisBook} />
+          <MyBookIndex  onLogOut={handleLogOut} onPicture={setMyThisBook} />
         </Route>
         <Route exact path="/book_index/:id">
-          <ThisBook book={thisBook}  onLogOut={handleLogOut} />
+          <ThisBook onLogOut={handleLogOut} />
         </Route>
         <Route exact path ="/my_book_index/:my_id">
           <MyThisBook book={myThisBook}  onLogOut={handleLogOut} onRemove={handleRemove} />

@@ -6,9 +6,10 @@ import NewPostForm from "./NewPostForm";
 
 import { useSelector } from "react-redux";
 
-function ThisBook({ book, onLogOut }) {
+function ThisBook({ onLogOut }) {
     const [posts, setPosts] =useState([])
     const user=useSelector(state => state.user)
+    const book = useSelector(state => state.thisBook)
     useEffect(()=>{
         fetch(`/book_index/${book.id}`)
         .then(r=>r.json())
