@@ -1,4 +1,4 @@
-const myBooksReducer = (state=[], action) => {
+const myBooksReducer = (state= [], action) => {
     switch(action.type){
         case "GET_MY_BOOKS":
             
